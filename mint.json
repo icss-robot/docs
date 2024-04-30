@@ -17,7 +17,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@valuechecker.net"
     }
   ],
   "tabs": [
@@ -40,5 +40,8 @@
       ]
     }
   ],
-  "footerSocials": {}
+  "footerSocials": {
+    "linkedin": "https://se.linkedin.com/company/valuechecker-ai",
+    "website": "https://www.valuechecker.net"
+  }
 }
