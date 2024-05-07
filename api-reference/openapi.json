@@ -15,7 +15,7 @@
             "email": "support@valuechecker.net"
         }
     },
-    "externalDocs":{
+    "externalDocs": {
         "description": "PDF Documentation (official)",
         "url": "https://www.valuechecker.net/docs/api/pdf"
     },
@@ -832,34 +832,34 @@
                                             },
                                             "price_clusters": {
                                                 "low": {
-                                                  "udc_id": 369929,
-                                                  "pid": 1941916191,
-                                                  "group": "low",
-                                                  "price": 147,
-                                                  "count": 31,
-                                                  "percentage": 0.76,
-                                                  "min_price": 19,
-                                                  "max_price": 364
+                                                    "udc_id": 369929,
+                                                    "pid": 1941916191,
+                                                    "group": "low",
+                                                    "price": 147,
+                                                    "count": 31,
+                                                    "percentage": 0.76,
+                                                    "min_price": 19,
+                                                    "max_price": 364
                                                 },
                                                 "medium": {
-                                                  "udc_id": 369930,
-                                                  "pid": 1941916191,
-                                                  "group": "medium",
-                                                  "price": 158,
-                                                  "count": 41,
-                                                  "percentage": 1,
-                                                  "min_price": 19,
-                                                  "max_price": 1619
+                                                    "udc_id": 369930,
+                                                    "pid": 1941916191,
+                                                    "group": "medium",
+                                                    "price": 158,
+                                                    "count": 41,
+                                                    "percentage": 1,
+                                                    "min_price": 19,
+                                                    "max_price": 1619
                                                 },
                                                 "high": {
-                                                  "udc_id": 369931,
-                                                  "pid": 1941916191,
-                                                  "group": "high",
-                                                  "price": 1491,
-                                                  "count": 5,
-                                                  "percentage": 0.12,
-                                                  "min_price": 1289,
-                                                  "max_price": 1619
+                                                    "udc_id": 369931,
+                                                    "pid": 1941916191,
+                                                    "group": "high",
+                                                    "price": 1491,
+                                                    "count": 5,
+                                                    "percentage": 0.12,
+                                                    "min_price": 1289,
+                                                    "max_price": 1619
                                                 }
                                             },
                                             "child_products": [
@@ -1660,37 +1660,37 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "rpid":{
+                                    "rpid": {
                                         "type": "integer"
                                     },
-                                    "cp_name_cart":{
+                                    "cp_name_cart": {
                                         "type": "string"
                                     },
-                                    "rp_name_cart":{
+                                    "rp_name_cart": {
                                         "type": "string"
                                     },
-                                    "rp_pic_url":{
+                                    "rp_pic_url": {
                                         "type": "string"
                                     },
-                                    "rp_price_date":{
+                                    "rp_price_date": {
                                         "type": "string",
                                         "format": "date-time"
                                     },
-                                    "replacement_cost_value":{
+                                    "replacement_cost_value": {
                                         "type": "number",
                                         "multipleOf": 0.01
                                     },
-                                    "cp_price_estimate":{
+                                    "cp_price_estimate": {
                                         "type": "number",
                                         "multipleOf": 0.01
                                     },
-                                    "offer_id":{
+                                    "offer_id": {
                                         "type": "integer"
                                     },
-                                    "shop_name":{
+                                    "shop_name": {
                                         "type": "string"
                                     },
-                                    "shop_url":{
+                                    "shop_url": {
                                         "type": "string"
                                     }
                                 },
@@ -1700,7 +1700,7 @@
                                     "rp_name_cart": "An updated RP name",
                                     "rp_pic_url": "https://img.valuechecker.net/200x,---.jpg",
                                     "rp_price_date": "2024-05-07 10:13:44",
-                                    "replacement_cost_value":638.95,
+                                    "replacement_cost_value": 638.95,
                                     "cp_price_estimate": 650.00,
                                     "offer_id": 123,
                                     "shop_name": "Some shop - Global",
@@ -1884,52 +1884,52 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "actual_cash_value":{
+                                    "actual_cash_value": {
                                         "type": "number",
                                         "multipleOf": 0.01
                                     },
-                                    "acv_incl_tax":{
+                                    "acv_incl_tax": {
                                         "type": "integer"
                                     },
-                                    "date_claim":{
+                                    "date_claim": {
                                         "type": "string",
                                         "format": "date"
                                     },
-                                    "date_purchase":{
+                                    "date_purchase": {
                                         "type": "string",
                                         "format": "date"
                                     },
-                                    "depr_extra_one_year_no_receipt":{
+                                    "depr_extra_one_year_no_receipt": {
                                         "type": "boolean"
                                     },
-                                    "homepage_client_category_id":{
+                                    "homepage_client_category_id": {
                                         "type": "integer"
                                     },
-                                    "is_acv_cp_price_estimate_based":{
+                                    "is_acv_cp_price_estimate_based": {
                                         "type": "boolean"
                                     },
-                                    "item_quantity":{
+                                    "item_quantity": {
                                         "type": "integer"
                                     },
-                                    "selected_client_category_id":{
+                                    "selected_client_category_id": {
                                         "type": "integer"
                                     },
-                                    "update_time":{
+                                    "update_time": {
                                         "type": "string",
                                         "format": "date-time"
                                     }
                                 },
                                 "example": {
-                                    "actual_cash_value" : 221.20,
-                                    "acv_incl_tax" : 0,
-                                    "date_claim" : "2024-05-07",
-                                    "date_purchase" : "2024-05-01",
-                                    "depr_extra_one_year_no_receipt" : false,
-                                    "homepage_client_category_id" : 12922,
-                                    "is_acv_cp_price_estimate_based" : false,
-                                    "item_quantity" : 1,
-                                    "selected_client_category_id" : 12922,
-                                    "update_time" : "2024-05-07 10:36:44"
+                                    "actual_cash_value": 221.20,
+                                    "acv_incl_tax": 0,
+                                    "date_claim": "2024-05-07",
+                                    "date_purchase": "2024-05-01",
+                                    "depr_extra_one_year_no_receipt": false,
+                                    "homepage_client_category_id": 12922,
+                                    "is_acv_cp_price_estimate_based": false,
+                                    "item_quantity": 1,
+                                    "selected_client_category_id": 12922,
+                                    "update_time": "2024-05-07 10:36:44"
                                 }
                             }
                         }
@@ -2109,16 +2109,16 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "language":{
+                                    "language": {
                                         "type": "string"
                                     },
-                                    "client_id":{
+                                    "client_id": {
                                         "type": "integer"
                                     }
                                 },
                                 "example": {
-                                    "language" : "en",
-                                    "client_id" : 10
+                                    "language": "en",
+                                    "client_id": 10
                                 }
                             }
                         }
@@ -2210,16 +2210,16 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "language":{
+                                    "language": {
                                         "type": "string"
                                     },
-                                    "client_id":{
+                                    "client_id": {
                                         "type": "integer"
                                     }
                                 },
                                 "example": {
-                                    "language" : "en",
-                                    "client_id" : 10
+                                    "language": "en",
+                                    "client_id": 10
                                 }
                             }
                         }
