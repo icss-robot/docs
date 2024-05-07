@@ -1,5 +1,4 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
   "logo": {
     "dark": "/logo/dark.svg",
@@ -18,74 +17,64 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@valuechecker.net"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
   "tabs": [
     {
       "name": "API Reference",
       "url": "api-reference"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
-  ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Before Getting Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "before-getting-started/valuechecker-service-concepts",
+        "before-getting-started/valuechecker-api-essentials",
+        "before-getting-started/minimal-implementation"
       ]
     },
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/get-started",
+        "api-reference/query-parameter-requests",
+        "api-reference/create-client-reference",
+        "api-reference/product-search",
+        "api-reference/replacement-product-suggestions",
+        "api-reference/appraisals",
+        "api-reference/acv-calculations",
+        "api-reference/generate-reports",
+        "api-reference/appendix"
       ]
     },
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/default/clients",
+        "api-reference/default/client_categories",
+        "api-reference/default/client_reference",
+        "api-reference/default/client_reference-1",
+        "api-reference/default/client_reference-2",
+        "api-reference/default/search_suggestion",
+        "api-reference/default/product_search",
+        "api-reference/default/prices",
+        "api-reference/default/client_reference-appraisal",
+        "api-reference/default/client_reference-appraisal-1",
+        "api-reference/default/client_reference-appraisal-2",
+        "api-reference/default/client_reference-appraisal-3",
+        "api-reference/default/client_reference-appraisal-4",
+        "api-reference/default/client_reference-appraisal-5",
+        "api-reference/default/client_reference-appraisal-acv",
+        "api-reference/default/client_reference-appraisal-acv-1",
+        "api-reference/default/client_reference-report",
+        "api-reference/default/client_reference-appraisal-report"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "linkedin": "https://se.linkedin.com/company/valuechecker-ai",
+    "website": "https://www.valuechecker.net"
   }
 }

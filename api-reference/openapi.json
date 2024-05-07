@@ -1,195 +1,2353 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ValueChecker API",
+        "description": "WIP. USE WITH CAUTION! <br>The ValueChecker Application Programming Interface.",
+        "version": "0.20.70",
+        "x-logo": {
+            "url": "https://files.valuechecker.net/images/default-category-images/Value-Checker_top_bar_logo.png",
+            "backgroundColor": "#FFFFFF",
+            "altText": "ValueChecker logo"
         },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+        "contact": {
+            "name": "Support",
+            "url": "https://www.valuechecker.net/docs/api/pdf",
+            "email": "support@valuechecker.net"
         }
-      }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      }
+    "externalDocs": {
+        "description": "PDF Documentation (official)",
+        "url": "https://www.valuechecker.net/docs/api/pdf"
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
+    "servers": [
+        {
+            "url": "https://api.valuechecker.net/",
+            "description": "ValueChecker API URL."
+        }
+    ],
+    "paths": {
+        "/clients": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Client Information",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:03:35 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "85"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "945ccee0-a255-403b-9a32-863a5f2f2c6a"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "client_id": 11,
+                                        "client_name": "Demo UK",
+                                        "country_code": "uk",
+                                        "language": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_categories": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "All Client Categories",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:06:13 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "9449"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "45d2892d-2af4-4b0e-9c68-e4bb2fec97de"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "client_category_id": 30893,
+                                        "client_category": "Undefined",
+                                        "parent_client_category_id": 0,
+                                        "is_group_category": false,
+                                        "cid": 0,
+                                        "category": "Undefined",
+                                        "api_sort_order": 0,
+                                        "has_depreciation": false,
+                                        "has_replacement": false,
+                                        "acv_disabled": true,
+                                        "show_closest_matches": true
+                                    },
+                                    {
+                                        "client_category_id": 2740,
+                                        "client_category": "Mobile Phones",
+                                        "parent_client_category_id": 0,
+                                        "is_group_category": false,
+                                        "cid": 4364,
+                                        "category": "Cell Phones",
+                                        "api_sort_order": 1,
+                                        "has_depreciation": true,
+                                        "has_replacement": true,
+                                        "acv_disabled": false,
+                                        "show_closest_matches": true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference": {
+            "post": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Create Client Reference",
+                "requestBody": {
+                    "content": {}
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Reference 321"
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:10:05 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "66"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "93bb1e26-0d81-4d82-8ada-f40b10eabb50"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "client_reference_id": 9337,
+                                    "client_reference": "Reference 321"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "All Client References",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:11:47 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "179"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "e4a2a557-4d7e-484d-b422-bdbaf32ca397"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "client_reference_id": 9337,
+                                        "client_reference": "Reference 321",
+                                        "create_time": "2023-07-25 11:10:05",
+                                        "update_time": "2023-07-25 11:10:05",
+                                        "user_id": 16459,
+                                        "client_id": 11
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Get Specific Client Reference",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 10:33:35 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "177"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "07b2ea33-1002-44d6-adec-0e8d23b14a87"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "client_reference_id": 9337,
+                                    "client_reference": "Reference 321",
+                                    "user_id": 16459,
+                                    "client_id": 11,
+                                    "create_time": "2023-07-25 11:10:05",
+                                    "update_time": "2023-07-25 11:10:05"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/search_suggestion": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "CP: Fast Product Search",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "{{query}}"
+                    },
+                    {
+                        "name": "client_category",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "{{client_category}}"
+                    },
+                    {
+                        "name": "client_category_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "{{client_category_id}}"
+                    },
+                    {
+                        "name": "force_client_category",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "example": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 10:34:22 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "20567"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "32b26779-c508-42fe-b084-abc52c7c789e"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "results": [
+                                        {
+                                            "product_name": "Apple iPhone 14 128GB (2022)",
+                                            "pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "product_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "pid": 1262830543,
+                                            "cid": 4364,
+                                            "specs": [
+                                                {
+                                                    "spec_id": 999,
+                                                    "spec_value": "36",
+                                                    "spec_value_display": "Apple",
+                                                    "spec_value_numeric": 3,
+                                                    "spec_name": "brand",
+                                                    "spec_name_display": "Brand"
+                                                },
+                                                {
+                                                    "spec_id": 1580,
+                                                    "spec_value": "15.494",
+                                                    "spec_value_display": "6.1\"",
+                                                    "spec_value_numeric": 15.49,
+                                                    "spec_name": "",
+                                                    "spec_name_display": "Foldable Screen"
+                                                },
+                                                {
+                                                    "spec_id": 8300,
+                                                    "spec_value": "2022-07-01",
+                                                    "spec_value_display": "2022",
+                                                    "spec_value_numeric": 1656633600,
+                                                    "spec_name": "release date",
+                                                    "spec_name_display": "Release Year"
+                                                },
+                                                {
+                                                    "spec_id": 8000,
+                                                    "spec_value": "128000",
+                                                    "spec_value_display": "128 GB",
+                                                    "spec_value_numeric": 128000,
+                                                    "spec_name": "size internal drive",
+                                                    "spec_name_display": "Storage Capacity"
+                                                },
+                                                {
+                                                    "spec_id": 5000,
+                                                    "spec_value": "15.494",
+                                                    "spec_value_display": "6.1\"",
+                                                    "spec_value_numeric": 15.49,
+                                                    "spec_name": "screen size",
+                                                    "spec_name_display": "Screen Size"
+                                                }
+                                            ],
+                                            "price": {
+                                                "price_min": 850,
+                                                "price_max": 850,
+                                                "shop_count": 10,
+                                                "price_date": "2022-09-11 20:40:16"
+                                            }
+                                        },
+                                        {
+                                            "product_name": "Apple iPhone 14 Plus 128GB (2022)",
+                                            "pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "product_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "pid": 1262830545,
+                                            "cid": 4364,
+                                            "specs": [
+                                                {
+                                                    "spec_id": 999,
+                                                    "spec_value": "36",
+                                                    "spec_value_display": "Apple",
+                                                    "spec_value_numeric": 3,
+                                                    "spec_name": "brand",
+                                                    "spec_name_display": "Brand"
+                                                },
+                                                {
+                                                    "spec_id": 1580,
+                                                    "spec_value": "No",
+                                                    "spec_value_display": "",
+                                                    "spec_value_numeric": 0,
+                                                    "spec_name": "",
+                                                    "spec_name_display": "Foldable Screen"
+                                                },
+                                                {
+                                                    "spec_id": 8300,
+                                                    "spec_value": "2022-07-01",
+                                                    "spec_value_display": "2022",
+                                                    "spec_value_numeric": 1656633600,
+                                                    "spec_name": "release date",
+                                                    "spec_name_display": "Release Year"
+                                                },
+                                                {
+                                                    "spec_id": 8000,
+                                                    "spec_value": "128000",
+                                                    "spec_value_display": "128 GB",
+                                                    "spec_value_numeric": 128000,
+                                                    "spec_name": "size internal drive",
+                                                    "spec_name_display": "Storage Capacity"
+                                                },
+                                                {
+                                                    "spec_id": 5000,
+                                                    "spec_value": "17.018",
+                                                    "spec_value_display": "6.7\"",
+                                                    "spec_value_numeric": 17.02,
+                                                    "spec_name": "screen size",
+                                                    "spec_name_display": "Screen Size"
+                                                }
+                                            ],
+                                            "price": {
+                                                "price_min": 700,
+                                                "price_max": 1200,
+                                                "shop_count": 134,
+                                                "price_date": "2023-07-20 03:41:22"
+                                            }
+                                        }
+                                    ],
+                                    "query": "iphone 14"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product_search": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "CP: Extended Product Search (core)",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "{{query}}"
+                    },
+                    {
+                        "name": "client_category_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "{{client_category_id}}"
+                    },
+                    {
+                        "name": "client_category",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "{{client_category}}"
+                    },
+                    {
+                        "name": "force_client_category",
+                        "in": "query",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "example": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 10:35:35 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "16972"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "5823ed94-af9a-427d-b9e3-08f8bc70702f"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "results": [
+                                        {
+                                            "pid": 1262830543,
+                                            "client_category_id": 4364,
+                                            "client_category": "Cell Phones",
+                                            "product_name": "Apple iPhone 14 128GB (2022)",
+                                            "product_picture_url": "https://img.valuechecker.net/,---.jpg",
+                                            "specs": [
+                                                {
+                                                    "spec_id": 999,
+                                                    "spec_value": "36",
+                                                    "spec_value_display": "Apple",
+                                                    "spec_value_numeric": 3,
+                                                    "spec_name": "Brand",
+                                                    "spec_name_display": "Brand"
+                                                },
+                                                {
+                                                    "spec_id": 1580,
+                                                    "spec_value": "15.494",
+                                                    "spec_value_display": "6.1\"",
+                                                    "spec_value_numeric": 15.49,
+                                                    "spec_name": "Foldable Screen",
+                                                    "spec_name_display": "Foldable Screen"
+                                                },
+                                                {
+                                                    "spec_id": 8300,
+                                                    "spec_value": "2022-07-01",
+                                                    "spec_value_display": "2022",
+                                                    "spec_value_numeric": 1656633600,
+                                                    "spec_name": "Release Year",
+                                                    "spec_name_display": "Release Year"
+                                                },
+                                                {
+                                                    "spec_id": 8000,
+                                                    "spec_value": "128000",
+                                                    "spec_value_display": "128 GB",
+                                                    "spec_value_numeric": 128000,
+                                                    "spec_name": "Storage Capacity",
+                                                    "spec_name_display": "Storage Capacity"
+                                                },
+                                                {
+                                                    "spec_id": 5000,
+                                                    "spec_value": "15.494",
+                                                    "spec_value_display": "6.1\"",
+                                                    "spec_value_numeric": 15.49,
+                                                    "spec_name": "Screen Size",
+                                                    "spec_name_display": "Screen Size"
+                                                }
+                                            ],
+                                            "price": {
+                                                "price_min": 850,
+                                                "price_max": 850,
+                                                "shop_count": 10,
+                                                "price_date": "2022-09-11 20:40:16"
+                                            },
+                                            "price_clusters": {
+                                                "low": {
+                                                    "udc_id": 369929,
+                                                    "pid": 1941916191,
+                                                    "group": "low",
+                                                    "price": 147,
+                                                    "count": 31,
+                                                    "percentage": 0.76,
+                                                    "min_price": 19,
+                                                    "max_price": 364
+                                                },
+                                                "medium": {
+                                                    "udc_id": 369930,
+                                                    "pid": 1941916191,
+                                                    "group": "medium",
+                                                    "price": 158,
+                                                    "count": 41,
+                                                    "percentage": 1,
+                                                    "min_price": 19,
+                                                    "max_price": 1619
+                                                },
+                                                "high": {
+                                                    "udc_id": 369931,
+                                                    "pid": 1941916191,
+                                                    "group": "high",
+                                                    "price": 1491,
+                                                    "count": 5,
+                                                    "percentage": 0.12,
+                                                    "min_price": 1289,
+                                                    "max_price": 1619
+                                                }
+                                            },
+                                            "child_products": [
+                                                "Apple iPhone 14 Plus 128GB (PRODUCT)RED",
+                                                "Apple iPhone 14 Plus 128GB (PRODUCT)RED Special Edition"
+                                            ],
+                                            "child_product_contents": []
+                                        },
+                                        {
+                                            "pid": 1262830545,
+                                            "client_category_id": 4364,
+                                            "client_category": "Cell Phones",
+                                            "product_name": "Apple iPhone 14 Plus 128GB (2022)",
+                                            "product_picture_url": "https://img.valuechecker.net/,---.jpg",
+                                            "specs": [
+                                                {
+                                                    "spec_id": 999,
+                                                    "spec_value": "36",
+                                                    "spec_value_display": "Apple",
+                                                    "spec_value_numeric": 3,
+                                                    "spec_name": "Brand",
+                                                    "spec_name_display": "Brand"
+                                                },
+                                                {
+                                                    "spec_id": 8300,
+                                                    "spec_value": "2022-07-01",
+                                                    "spec_value_display": "2022",
+                                                    "spec_value_numeric": 1656633600,
+                                                    "spec_name": "Release Year",
+                                                    "spec_name_display": "Release Year"
+                                                },
+                                                {
+                                                    "spec_id": 8000,
+                                                    "spec_value": "128000",
+                                                    "spec_value_display": "128 GB",
+                                                    "spec_value_numeric": 128000,
+                                                    "spec_name": "Storage Capacity",
+                                                    "spec_name_display": "Storage Capacity"
+                                                },
+                                                {
+                                                    "spec_id": 5000,
+                                                    "spec_value": "17.018",
+                                                    "spec_value_display": "6.7\"",
+                                                    "spec_value_numeric": 17.02,
+                                                    "spec_name": "Screen Size",
+                                                    "spec_name_display": "Screen Size"
+                                                }
+                                            ],
+                                            "price": {
+                                                "price_min": 700,
+                                                "price_max": 1200,
+                                                "shop_count": 134,
+                                                "price_date": "2023-07-20 03:41:22"
+                                            },
+                                            "child_products": [],
+                                            "child_product_contents": []
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/prices": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "RP: Replacement Products",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "required": true,
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "pid",
+                        "required": true,
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1262828314"
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "{{country}}"
+                    },
+                    {
+                        "name": "client_category",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "{{client_category}}"
+                    },
+                    {
+                        "name": "client_category_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "{{client_category_id}}"
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 11:48:58 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "330017"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "5f6962fe-5c32-4d8d-ad17-0bca391b0c19"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "claimed_product": {
+                                        "pid": 1262828314,
+                                        "master_name": "",
+                                        "product_name": "Apple iPhone 14 Pro Max 1TB",
+                                        "cid": 4364,
+                                        "pic_url": "https://img.valuechecker.net/,---.jpg",
+                                        "product_pic_url": "https://img.valuechecker.net/200x,---.jpg",
+                                        "product_url": "https://www.pricerunner.com/pl/1-3202448228/Mobile-Phones/Apple-iPhone-14-Pro-Max-1TB-Compare-Prices",
+                                        "specs": [
+                                            {
+                                                "spec_id": 888,
+                                                "spec_value": "Pro",
+                                                "spec_value_display": "Pro",
+                                                "spec_value_numeric": 2,
+                                                "spec_name_display": "Model Family"
+                                            },
+                                            {
+                                                "spec_id": 999,
+                                                "spec_value": "36",
+                                                "spec_value_display": "Apple",
+                                                "spec_value_numeric": 3,
+                                                "spec_name_display": "Brand"
+                                            },
+                                            {
+                                                "spec_id": 8300,
+                                                "spec_value": "2022-07-01",
+                                                "spec_value_display": "2022",
+                                                "spec_value_numeric": 1656633600,
+                                                "spec_name_display": "Release Year"
+                                            },
+                                            {
+                                                "spec_id": 8000,
+                                                "spec_value": "1000000",
+                                                "spec_value_display": "1024 GB",
+                                                "spec_value_numeric": 1000000,
+                                                "spec_name_display": "Storage Capacity"
+                                            },
+                                            {
+                                                "spec_id": 5000,
+                                                "spec_value": "17.018",
+                                                "spec_value_display": "6.7\"",
+                                                "spec_value_numeric": 17.02,
+                                                "spec_name_display": "Screen Size"
+                                            }
+                                        ],
+                                        "in_stock": true,
+                                        "query_at_limit": false
+                                    },
+                                    "grouped_prices": [
+                                        [
+                                            {
+                                                "shop_product_name": "Apple iPhone 14 Pro Max (1 TB) - Gold",
+                                                "currency": "GBP",
+                                                "total_price": 1684.99,
+                                                "base_price": 1684.99,
+                                                "price_date": "2023-07-25 11:07:41",
+                                                "offer_id": 228246862,
+                                                "offer_url": "https://offer-staging.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                                "international": false,
+                                                "is_refurbished": false,
+                                                "in_stock": true,
+                                                "blocked": false,
+                                                "country_code": "uk",
+                                                "product": {
+                                                    "pid": 1263096838,
+                                                    "sid": 44001,
+                                                    "source_internal_id": "3202448228",
+                                                    "master_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                                    "product_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                                    "master_pic_url": "https://img.valuechecker.net/200x,---.jpg",
+                                                    "pic_url": "https://img.valuechecker.net/,---.jpg",
+                                                    "product_pic_url": "https://img.valuechecker.net/200x,---.jpg",
+                                                    "product_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                                    "brand": "Apple",
+                                                    "price": {
+                                                        "price_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf"
+                                                    },
+                                                    "rp_first_choice": true,
+                                                    "specs": [
+                                                        {
+                                                            "spec_id": 888,
+                                                            "spec_value_display": "Pro",
+                                                            "spec_value_numeric": 2,
+                                                            "spec_name_display": "Model Family"
+                                                        },
+                                                        {
+                                                            "spec_id": 999,
+                                                            "spec_value_display": "Apple",
+                                                            "spec_value_numeric": 3,
+                                                            "spec_name_display": "Brand"
+                                                        },
+                                                        {
+                                                            "spec_id": 8300,
+                                                            "spec_value_display": "2022",
+                                                            "spec_value_numeric": 1656633600,
+                                                            "spec_name_display": "Release Year"
+                                                        },
+                                                        {
+                                                            "spec_id": 8000,
+                                                            "spec_value_display": "1024 GB",
+                                                            "spec_value_numeric": 1000000,
+                                                            "spec_name_display": "Storage Capacity"
+                                                        },
+                                                        {
+                                                            "spec_id": 5000,
+                                                            "spec_value_display": "6.7\"",
+                                                            "spec_value_numeric": 17.02,
+                                                            "spec_name_display": "Screen Size"
+                                                        }
+                                                    ],
+                                                    "same_alid_as_cp": true,
+                                                    "score_perfect": true,
+                                                    "score": 12459,
+                                                    "is_user_defined_claim": false
+                                                },
+                                                "shop": {
+                                                    "shop_name": "Amazon UK",
+                                                    "shop_status": 1,
+                                                    "shop_score": 0
+                                                },
+                                                "filtered_price": false,
+                                                "outside_price_range": false
+                                            },
+                                            {
+                                                "shop_product_name": "Apple iPhone 14 Pro Max (1 TB) - Deep Purple",
+                                                "currency": "GBP",
+                                                "total_price": 1684.99,
+                                                "base_price": 1684.99,
+                                                "price_date": "2023-07-25 11:07:41",
+                                                "offer_id": 228246863,
+                                                "offer_url": "https://offer-staging.valuechecker.net/dAkKadvB66xaQJoaQF5BrG",
+                                                "international": false,
+                                                "is_refurbished": false,
+                                                "in_stock": true,
+                                                "blocked": false,
+                                                "country_code": "uk",
+                                                "product": {
+                                                    "pid": 1263096838,
+                                                    "sid": 44001,
+                                                    "source_internal_id": "3202448228",
+                                                    "master_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                                    "product_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                                    "master_pic_url": "https://img.valuechecker.net/200x,---.jpg",
+                                                    "pic_url": "https://img.valuechecker.net/,---.jpg",
+                                                    "product_pic_url": "https://img.valuechecker.net/200x,---.jpg",
+                                                    "product_url": "https://offer-staging.valuechecker.net/dAkKadvB66xaQJoaQF5BrG",
+                                                    "brand": "Apple",
+                                                    "price": {
+                                                        "price_url": "https://offer-staging.valuechecker.net/dAkKadvB66xaQJoaQF5BrG"
+                                                    },
+                                                    "rp_first_choice": true,
+                                                    "specs": [
+                                                        {
+                                                            "spec_id": 888,
+                                                            "spec_value_display": "Pro",
+                                                            "spec_value_numeric": 2,
+                                                            "spec_name_display": "Model Family"
+                                                        },
+                                                        {
+                                                            "spec_id": 999,
+                                                            "spec_value_display": "Apple",
+                                                            "spec_value_numeric": 3,
+                                                            "spec_name_display": "Brand"
+                                                        },
+                                                        {
+                                                            "spec_id": 8300,
+                                                            "spec_value_display": "2022",
+                                                            "spec_value_numeric": 1656633600,
+                                                            "spec_name_display": "Release Year"
+                                                        },
+                                                        {
+                                                            "spec_id": 8000,
+                                                            "spec_value_display": "1024 GB",
+                                                            "spec_value_numeric": 1000000,
+                                                            "spec_name_display": "Storage Capacity"
+                                                        },
+                                                        {
+                                                            "spec_id": 5000,
+                                                            "spec_value_display": "6.7\"",
+                                                            "spec_value_numeric": 17.02,
+                                                            "spec_name_display": "Screen Size"
+                                                        }
+                                                    ],
+                                                    "same_alid_as_cp": true,
+                                                    "score_perfect": true,
+                                                    "score": 12459,
+                                                    "is_user_defined_claim": false
+                                                },
+                                                "shop": {
+                                                    "shop_name": "Amazon UK",
+                                                    "shop_status": 1,
+                                                    "shop_score": 0
+                                                },
+                                                "filtered_price": false,
+                                                "outside_price_range": false
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}/appraisal": {
+            "post": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Create Appraisal",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "client_id": {
+                                        "type": "string"
+                                    },
+                                    "client_reference_id": {
+                                        "type": "string"
+                                    },
+                                    "cpid": {
+                                        "type": "string"
+                                    },
+                                    "rpid": {
+                                        "type": "string"
+                                    },
+                                    "homepage_client_category_id": {
+                                        "type": "integer"
+                                    },
+                                    "selected_client_category_id": {
+                                        "type": "integer"
+                                    },
+                                    "item_quantity": {
+                                        "type": "integer"
+                                    },
+                                    "is_price_per_item": {
+                                        "type": "boolean"
+                                    },
+                                    "rp_name_cart": {
+                                        "type": "string"
+                                    },
+                                    "offer_id": {
+                                        "type": "string"
+                                    },
+                                    "shop_name": {
+                                        "type": "string"
+                                    },
+                                    "shop_url": {
+                                        "type": "string"
+                                    },
+                                    "replacement_cost_value": {
+                                        "type": "number",
+                                        "multipleOf": 0.01
+                                    },
+                                    "rp_price_date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "client_id": "10",
+                                "client_reference_id": "200",
+                                "cpid": "123456",
+                                "rpid": "234567",
+                                "homepage_client_category_id": 2740,
+                                "selected_client_category_id": 2740,
+                                "item_quantity": 1,
+                                "is_price_per_item": true,
+                                "rp_name_cart": "A product name",
+                                "offer_id": "9876",
+                                "shop_name": "A shop name",
+                                "shop_url": "https://some.shop",
+                                "replacement_cost_value": 300.00,
+                                "rp_price_date": "2021-02-17 13:36:10"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 11:51:08 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "23"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "58704e3b-564a-4a6a-935c-26169a982829"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "appraisal_id": 97771
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "All Apprisals In Specific Client Reference",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "required": true,
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 11:52:07 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "2238"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "4b4a1ee3-9217-4452-8d61-6427a195fa78"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "appraisal_id": 97771,
+                                        "client_reference_id": 9337,
+                                        "cpid": 1262828314,
+                                        "rpid": 1263096838,
+                                        "create_time": "2023-07-25 13:51:08",
+                                        "update_time": "2023-07-25 13:51:08",
+                                        "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
+                                        "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                        "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                        "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                        "is_user_defined_claim": false,
+                                        "item_quantity": 1,
+                                        "show_price_per_item": true,
+                                        "replacement_cost_value": 1684.99,
+                                        "rp_price_date": "2023-07-25 11:07:41",
+                                        "homepage_client_category_id": 2740,
+                                        "selected_client_category_id": 2740,
+                                        "shop_name": "Amazon UK",
+                                        "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                        "is_acv_cp_price_estimate_based": false,
+                                        "is_acv_claimed_damage_based": false,
+                                        "depr_extra_one_year_no_receipt": false,
+                                        "offer_id": 228246862,
+                                        "file_count": 0,
+                                        "row_id": 1
+                                    },
+                                    {
+                                        "appraisal_id": 97770,
+                                        "client_reference_id": 9337,
+                                        "cpid": 1262828314,
+                                        "rpid": 1263096838,
+                                        "create_time": "2023-07-25 13:50:46",
+                                        "update_time": "2023-07-25 13:50:46",
+                                        "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
+                                        "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                        "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                        "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                        "is_user_defined_claim": false,
+                                        "item_quantity": 1,
+                                        "show_price_per_item": true,
+                                        "replacement_cost_value": 1684.99,
+                                        "rp_price_date": "2023-07-25 11:07:41",
+                                        "homepage_client_category_id": 2740,
+                                        "selected_client_category_id": 2740,
+                                        "shop_name": "Amazon UK",
+                                        "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                        "is_acv_cp_price_estimate_based": false,
+                                        "is_acv_claimed_damage_based": false,
+                                        "depr_extra_one_year_no_receipt": false,
+                                        "offer_id": 228246862,
+                                        "file_count": 0,
+                                        "row_id": 2
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Delete All Appraisals In Specific Client Reference",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 11:52:45 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "8776d644-c8ac-4134-a703-bc49b95ccc15"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}/appraisal/{appraisal_id}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Get Specific Appraisal",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "appraisal_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 11:54:40 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "1117"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "33fb2b11-220f-4f60-9cc8-218d34985d81"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "appraisal_id": 97773,
+                                    "client_reference_id": 9337,
+                                    "cpid": 1262828314,
+                                    "rpid": 1263096838,
+                                    "create_time": "2023-07-25 13:54:37",
+                                    "update_time": "2023-07-25 13:54:37",
+                                    "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
+                                    "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                    "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                    "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                    "is_user_defined_claim": false,
+                                    "item_quantity": 1,
+                                    "show_price_per_item": true,
+                                    "replacement_cost_value": 1684.99,
+                                    "rp_price_date": "2023-07-25 11:07:41",
+                                    "homepage_client_category_id": 2740,
+                                    "selected_client_category_id": 2740,
+                                    "shop_name": "Amazon UK",
+                                    "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                    "is_acv_cp_price_estimate_based": false,
+                                    "is_acv_claimed_damage_based": false,
+                                    "depr_extra_one_year_no_receipt": false,
+                                    "offer_id": 228246862,
+                                    "file_count": 0,
+                                    "row_id": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Modify Specific Appraisal",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "rpid": {
+                                        "type": "integer"
+                                    },
+                                    "cp_name_cart": {
+                                        "type": "string"
+                                    },
+                                    "rp_name_cart": {
+                                        "type": "string"
+                                    },
+                                    "rp_pic_url": {
+                                        "type": "string"
+                                    },
+                                    "rp_price_date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "replacement_cost_value": {
+                                        "type": "number",
+                                        "multipleOf": 0.01
+                                    },
+                                    "cp_price_estimate": {
+                                        "type": "number",
+                                        "multipleOf": 0.01
+                                    },
+                                    "offer_id": {
+                                        "type": "integer"
+                                    },
+                                    "shop_name": {
+                                        "type": "string"
+                                    },
+                                    "shop_url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "rpid": 12345683,
+                                    "cp_name_cart": "An updated CP name",
+                                    "rp_name_cart": "An updated RP name",
+                                    "rp_pic_url": "https://img.valuechecker.net/200x,---.jpg",
+                                    "rp_price_date": "2024-05-07 10:13:44",
+                                    "replacement_cost_value": 638.95,
+                                    "cp_price_estimate": 650.00,
+                                    "offer_id": 123,
+                                    "shop_name": "Some shop - Global",
+                                    "shop_url": "https://www.some.shop/path"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "appraisal_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 11:57:46 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "0"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "a0c6fdd5-4844-48b3-b1b8-06fdee3f2d88"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Delete Specific Appraisal",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "appraisal_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Wed, 26 Jul 2023 15:05:16 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "ff777227-f250-4d6b-adcb-4fca27fbb361"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}/appraisal/{appraisal_id}/acv": {
+            "put": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Perform ACV Calculation",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "actual_cash_value": {
+                                        "type": "number",
+                                        "multipleOf": 0.01
+                                    },
+                                    "acv_incl_tax": {
+                                        "type": "integer"
+                                    },
+                                    "date_claim": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "date_purchase": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "depr_extra_one_year_no_receipt": {
+                                        "type": "boolean"
+                                    },
+                                    "homepage_client_category_id": {
+                                        "type": "integer"
+                                    },
+                                    "is_acv_cp_price_estimate_based": {
+                                        "type": "boolean"
+                                    },
+                                    "item_quantity": {
+                                        "type": "integer"
+                                    },
+                                    "selected_client_category_id": {
+                                        "type": "integer"
+                                    },
+                                    "update_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "example": {
+                                    "actual_cash_value": 221.20,
+                                    "acv_incl_tax": 0,
+                                    "date_claim": "2024-05-07",
+                                    "date_purchase": "2024-05-01",
+                                    "depr_extra_one_year_no_receipt": false,
+                                    "homepage_client_category_id": 12922,
+                                    "is_acv_cp_price_estimate_based": false,
+                                    "item_quantity": 1,
+                                    "selected_client_category_id": 12922,
+                                    "update_time": "2024-05-07 10:36:44"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "appraisal_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Wed, 26 Jul 2023 15:12:13 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "0"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "8b00105c-5665-42fd-b001-766c154b13fe"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Delete ACV Calculation",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "appraisal_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Wed, 26 Jul 2023 15:05:16 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "ff777227-f250-4d6b-adcb-4fca27fbb361"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}/report": {
+            "post": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Create Report For Client Reference",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "language": {
+                                        "type": "string"
+                                    },
+                                    "client_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "example": {
+                                    "language": "en",
+                                    "client_id": 10
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Wed, 26 Jul 2023 15:15:20 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "106"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "aab7f42d-1dae-4bc7-8c2d-3f14f8d60b64"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 1583693-11.pdf"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}/appraisal/{appraisal_id}/report": {
+            "post": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Create Report For Appraisal",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "language": {
+                                        "type": "string"
+                                    },
+                                    "client_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "example": {
+                                    "language": "en",
+                                    "client_id": 10
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "apiKey ABC123"
+                    },
+                    {
+                        "name": "client_reference_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "appraisal_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Wed, 26 Jul 2023 15:13:40 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "101"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "86205487-55ec-4a35-971d-fcf196e3fe60"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 97893.pdf"
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
