@@ -28,15 +28,25 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Before Getting Started",
       "pages": [
-        "introduction"
+        "before-getting-started/valuechecker-service-concepts",
+        "before-getting-started/valuechecker-api-essentials",
+        "before-getting-started/minimal-implementation"
       ]
     },
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/get-started",
+        "api-reference/query-parameter-requests",
+        "api-reference/create-client-reference",
+        "api-reference/product-search",
+        "api-reference/replacement-product-suggestions",
+        "api-reference/appraisals",
+        "api-reference/acv-calculations",
+        "api-reference/generate-reports",
+        "api-reference/appendix"
       ]
     },
     {
