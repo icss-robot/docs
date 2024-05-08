@@ -25,6 +25,20 @@
             "description": "ValueChecker API URL."
         }
     ],
+    "components": {
+        "securitySchemes": {
+            "apiKey": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKey": []
+        }
+    ],
     "paths": {
         "/clients": {
             "get": {
@@ -33,15 +47,6 @@
                 ],
                 "summary": "Client Information",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_id",
                         "in": "query",
@@ -112,15 +117,6 @@
                 ],
                 "summary": "All Client Categories",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_id",
                         "in": "query",
@@ -215,15 +211,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference",
                         "in": "query",
                         "required": true,
@@ -297,15 +284,6 @@
                 "summary": "All Client References",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_id",
                         "in": "query",
                         "schema": {
@@ -377,15 +355,6 @@
                 ],
                 "summary": "Get Specific Client Reference",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -464,15 +433,6 @@
                 ],
                 "summary": "CP: Fast Product Search",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "query",
                         "in": "query",
@@ -683,15 +643,6 @@
                 ],
                 "summary": "CP: Extended Product Search (core)",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "query",
                         "in": "query",
@@ -932,15 +883,6 @@
                 ],
                 "summary": "RP: Replacement Products",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "required": true,
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "pid",
                         "required": true,
@@ -1308,14 +1250,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -1378,15 +1312,6 @@
                 ],
                 "summary": "All Apprisals In Specific Client Reference",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "required": true,
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -1512,15 +1437,6 @@
                 "summary": "Delete All Appraisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -1585,15 +1501,6 @@
                 ],
                 "summary": "Get Specific Appraisal",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -1754,15 +1661,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -1839,15 +1737,6 @@
                 ],
                 "summary": "Delete Specific Appraisal",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -1979,15 +1868,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -2064,15 +1944,6 @@
                 ],
                 "summary": "Delete ACV Calculation",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -2168,15 +2039,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -2268,15 +2130,6 @@
                     }
                 },
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
