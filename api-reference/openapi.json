@@ -50,6 +50,421 @@
                 },
                 "example": 10
             }
+        },
+        "schemas": {
+            "PriceRange": {
+                "type": "object",
+                "properties": {
+                    "price_min": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "price_max": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "shop_count": {
+                        "type": "integer"
+                    },
+                    "price_date": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Spec": {
+                "type": "object",
+                "properties": {
+                    "spec_id": {
+                        "type": "integer"
+                    },
+                    "spec_value": {
+                        "type": "string"
+                    },
+                    "spec_value_display": {
+                        "type": "string"
+                    },
+                    "spec_value_numeric": {
+                        "type": "number"
+                    },
+                    "spec_name": {
+                        "type": "string"
+                    },
+                    "spec_name_display": {
+                        "type": "string"
+                    }
+                }
+            },
+            "SearchSuggestionProduct": {
+                "type": "object",
+                "properties": {
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "cid": {
+                        "type": "integer"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/PriceRange"
+                    }
+                }
+            },
+            "SearchProduct": {
+                "type": "object",
+                "properties": {
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "cid": {
+                        "type": "integer"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/PriceRange"
+                    },
+                    "price_clusters": {
+                        "$ref": "#/components/schemas/PriceClusters"
+                    },
+                    "child_products": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "child_product_contents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SearchSuggestionProduct"
+                        }
+                    }
+                }
+            },
+            "PriceClusterValue": {
+                "type": "object",
+                "properties": {
+                    "udc_id": {
+                        "type": "integer"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "percentage": {
+                        "type": "number"
+                    },
+                    "min_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "max_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    }
+                }
+            },
+            "PriceClusters": {
+                "type": "object",
+                "properties": {
+                    "low": {
+                        "$ref": "#/components/schemas/PriceClusterValue"
+                    },
+                    "medium": {
+                        "$ref": "#/components/schemas/PriceClusterValue"
+                    },
+                    "high": {
+                        "$ref": "#/components/schemas/PriceClusterValue"
+                    }
+                }
+            },
+            "ClaimedProduct": {
+                "type": "object",
+                "properties": {
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "master_name": {
+                        "type": "string"
+                    },
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "cid": {
+                        "type": "integer"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "product_url": {
+                        "type": "string"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "in_stock": {
+                        "type": "boolean"
+                    },
+                    "query_at_limit": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "GroupedPricesProduct": {
+                "type": "object",
+                "properties": {
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "sid": {
+                        "type": "integer"
+                    },
+                    "source_internal_id": {
+                        "type": "string"
+                    },
+                    "master_name": {
+                        "type": "string"
+                    },
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "master_pic_url": {
+                        "type": "string"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "product_url": {
+                        "type": "string"
+                    },
+                    "brand": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "object",
+                        "properties": {
+                            "price_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "rp_first_choice": {
+                        "type": "boolean"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "same_alid_as_cp": {
+                        "type": "boolean"
+                    },
+                    "score_perfect": {
+                        "type": "boolean"
+                    },
+                    "score": {
+                        "type": "number"
+                    },
+                    "is_user_defined_claim": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Shop": {
+                "type": "object",
+                "properties": {
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "shop_status": {
+                        "type": "integer"
+                    },
+                    "shop_score": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PriceListElement": {
+                "type": "object",
+                "properties": {
+                    "shop_product_name": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "total_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "base_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "price_date": {
+                        "type": "string"
+                    },
+                    "offer_id": {
+                        "type": "integer"
+                    },
+                    "offer_url": {
+                        "type": "string"
+                    },
+                    "international": {
+                        "type": "boolean"
+                    },
+                    "is_refurbished": {
+                        "type": "boolean"
+                    },
+                    "in_stock": {
+                        "type": "boolean"
+                    },
+                    "blocked": {
+                        "type": "boolean"
+                    },
+                    "country_code": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/GroupedPricesProduct"
+                    },
+                    "shop": {
+                        "$ref": "#/components/schemas/Shop"
+                    },
+                    "filtered_price": {
+                        "type": "boolean"
+                    },
+                    "outside_price_range": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Appraisal": {
+                "type": "object",
+                "properties": {
+                    "appraisal_id": {
+                        "type": "integer"
+                    },
+                    "client_reference_id": {
+                        "type": "integer"
+                    },
+                    "cpid": {
+                        "type": "integer"
+                    },
+                    "rpid": {
+                        "type": "integer"
+                    },
+                    "create_time": {
+                        "type": "string"
+                    },
+                    "update_time": {
+                        "type": "string"
+                    },
+                    "cp_name_cart": {
+                        "type": "string"
+                    },
+                    "rp_name_cart": {
+                        "type": "string"
+                    },
+                    "cp_pic_url": {
+                        "type": "string"
+                    },
+                    "rp_pic_url": {
+                        "type": "string"
+                    },
+                    "is_user_defined_claim": {
+                        "type": "boolean"
+                    },
+                    "item_quantity": {
+                        "type": "integer"
+                    },
+                    "show_price_per_item": {
+                        "type": "boolean"
+                    },
+                    "replacement_cost_value": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "rp_price_date": {
+                        "type": "string"
+                    },
+                    "homepage_client_category_id": {
+                        "type": "integer"
+                    },
+                    "selected_client_category_id": {
+                        "type": "integer"
+                    },
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "shop_url": {
+                        "type": "string"
+                    },
+                    "is_acv_cp_price_estimate_based": {
+                        "type": "boolean"
+                    },
+                    "is_acv_claimed_damage_based": {
+                        "type": "boolean"
+                    },
+                    "depr_extra_one_year_no_receipt": {
+                        "type": "boolean"
+                    },
+                    "offer_id": {
+                        "type": "integer"
+                    },
+                    "file_count": {
+                        "type": "integer"
+                    },
+                    "row_id": {
+                        "type": "integer"
+                    }
+                }
+            }
         }
     },
     "security": [
@@ -110,7 +525,24 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "client_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_name": {
+                                                "type": "string"
+                                            },
+                                            "country_code": {
+                                                "type": "string"
+                                            },
+                                            "language": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": [
                                     {
@@ -178,7 +610,45 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "client_category_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_category": {
+                                                "type": "string"
+                                            },
+                                            "parent_client_category_id": {
+                                                "type": "integer"
+                                            },
+                                            "is_group_category": {
+                                                "type": "boolean"
+                                            },
+                                            "cid": {
+                                                "type": "integer"
+                                            },
+                                            "category": {
+                                                "type": "string"
+                                            },
+                                            "api_sort_order": {
+                                                "type": "integer"
+                                            },
+                                            "has_depreciation": {
+                                                "type": "boolean"
+                                            },
+                                            "has_replacement": {
+                                                "type": "boolean"
+                                            },
+                                            "acv_disabled": {
+                                                "type": "boolean"
+                                            },
+                                            "show_closest_matches": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": [
                                     {
@@ -278,7 +748,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "client_reference_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_reference": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "client_reference_id": 9337,
@@ -340,7 +818,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "client_reference_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_reference": {
+                                            "type": "string"
+                                        },
+                                        "create_time": {
+                                            "type": "string"
+                                        },
+                                        "update_time": {
+                                            "type": "string"
+                                        },
+                                        "user_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_id": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 },
                                 "example": [
                                     {
@@ -418,7 +916,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "client_reference_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_reference": {
+                                            "type": "string"
+                                        },
+                                        "user_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_id": {
+                                            "type": "integer"
+                                        },
+                                        "create_time": {
+                                            "type": "string"
+                                        },
+                                        "update_time": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "client_reference_id": 9337,
@@ -519,7 +1037,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SearchSuggestionProduct"
+                                            }
+                                        },
+                                        "query": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "results": [
@@ -727,7 +1256,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SearchProduct"
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "results": [
@@ -785,7 +1322,7 @@
                                                 "shop_count": 10,
                                                 "price_date": "2022-09-11 20:40:16"
                                             },
-                                            "price_clusters": {
+                                            "PriceClusters": {
                                                 "low": {
                                                     "udc_id": 369929,
                                                     "pid": 1941916191,
@@ -965,7 +1502,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "claimed_product": {
+                                            "$ref": "#/components/schemas/ClaimedProduct"
+                                        },
+                                        "grouped_prices": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/PriceListElement"
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "claimed_product": {
@@ -1301,7 +1852,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "appraisal_id": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "appraisal_id": 97771
@@ -1370,7 +1926,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appraisal"
+                                    }
                                 },
                                 "example": [
                                     {
@@ -1563,7 +2122,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Appraisal"
                                 },
                                 "example": {
                                     "appraisal_id": 97773,
@@ -2082,7 +2641,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "string"
                                 },
                                 "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 1583693-11.pdf"
                             }
@@ -2180,7 +2739,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "string"
                                 },
                                 "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 97893.pdf"
                             }
