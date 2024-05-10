@@ -814,6 +814,51 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"client_reference\" parameter is required.",
+                                    "event_code": "ERMPCR",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The client_reference parameter is required."
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "401": {
                         "$ref": "#/components/responses/401"
                     }
@@ -1228,6 +1273,28 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"query\" parameter is required."
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1477,6 +1544,28 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"query\" parameter is required."
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1787,6 +1876,51 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"pid\" parameter is required.",
+                                    "event_code": "ERMPPR",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The \"pid\" parameter is required."
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1847,7 +1981,11 @@
                                         "type": "string",
                                         "format": "date-time"
                                     }
-                                }
+                                },
+                                "required": [
+                                    "cpid",
+                                    "rpid"
+                                ]
                             },
                             "example": {
                                 "client_id": "10",
@@ -1928,6 +2066,47 @@
                                 },
                                 "example": {
                                     "appraisal_id": 97771
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "cpid : field required; rpid : field required",
+                                    "event_code": "ERMPAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The \"cpid\" parameter is required."
+                                    }
                                 }
                             }
                         }
@@ -2570,6 +2749,47 @@
                                     "type": "object"
                                 },
                                 "example": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "The replacement cost value is needed to calculate the ACV.",
+                                    "event_code": "ERMPAV",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The replacement_cost_value is needed to calculate the ACV."
+                                    }
+                                }
                             }
                         }
                     },
