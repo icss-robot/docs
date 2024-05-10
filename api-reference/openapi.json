@@ -51,6 +51,49 @@
                 "example": 10
             }
         },
+        "responses": {
+            "401": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                },
+                                "event_code": {
+                                    "type": "string"
+                                },
+                                "event_dict": {
+                                    "type": "object",
+                                    "properties": {
+                                        "event_severity": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "example": {
+                            "error": "Invalid Authorization header",
+                            "event_code": "ERIT00",
+                            "event_dict": {
+                                "event_severity": "ERROR",
+                                "title": "Invalid Authorization header",
+                                "description": "Please provide the right authorization token"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "schemas": {
             "PriceRange": {
                 "type": "object",
@@ -554,6 +597,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -680,6 +726,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -764,6 +813,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -852,6 +904,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -948,6 +1003,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -1167,6 +1225,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -1413,6 +1474,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -1720,6 +1784,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -1864,6 +1931,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -1989,6 +2059,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -2050,6 +2123,9 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -2153,6 +2229,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -2284,6 +2363,9 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -2353,6 +2435,9 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -2487,6 +2572,9 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -2556,6 +2644,9 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -2646,6 +2737,9 @@
                                 "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 1583693-11.pdf"
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -2744,6 +2838,9 @@
                                 "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 97893.pdf"
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
