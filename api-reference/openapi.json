@@ -1051,6 +1051,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNFCR",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The \"client_reference_id\" \"14418\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2113,6 +2154,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The client_reference_id \"14418\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -2241,6 +2323,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -2305,6 +2428,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The client_reference_id \"14418\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2411,6 +2575,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -2545,6 +2750,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -2617,6 +2863,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2795,6 +3082,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -2867,6 +3195,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2960,6 +3329,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNF00",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong 'client_reference_id' value",
+                                        "description": "The client_reference_id '14418' was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -3061,6 +3471,47 @@
                     },
                     "401": {
                         "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
