@@ -41,6 +41,14 @@
                     "type": "string"
                 },
                 "example": "a1b2c3d4e5f6g7h8i9j0"
+            },
+            "client_id": {
+                "name": "client_id",
+                "in": "query",
+                "schema": {
+                    "type": "integer"
+                },
+                "example": 10
             }
         }
     },
@@ -58,12 +66,7 @@
                 "summary": "Client Information",
                 "parameters": [
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -131,12 +134,7 @@
                 "summary": "All Client Categories",
                 "parameters": [
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -236,12 +234,7 @@
                         "example": "Reference 321"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -303,12 +296,7 @@
                 "summary": "All Client References",
                 "parameters": [
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -386,12 +374,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -492,12 +475,7 @@
                         "example": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -705,12 +683,7 @@
                         "example": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -948,12 +921,7 @@
                         "example": "{{client_category_id}}"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -1358,12 +1326,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -1485,12 +1448,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -1561,12 +1519,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -1723,12 +1676,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -1803,12 +1751,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -1936,12 +1879,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -2016,12 +1954,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -2105,12 +2038,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -2208,12 +2136,7 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
