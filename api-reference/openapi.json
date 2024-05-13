@@ -740,7 +740,14 @@
                 ],
                 "summary": "Create Client Reference",
                 "requestBody": {
-                    "content": {}
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
                 },
                 "parameters": [
                     {
