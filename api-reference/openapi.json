@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ValueChecker API",
-        "description": "WIP. USE WITH CAUTION! <br>The ValueChecker Application Programming Interface.",
+        "description": "The ValueChecker Application Programming Interface.",
         "version": "0.20.70",
         "x-logo": {
             "url": "https://files.valuechecker.net/images/default-category-images/Value-Checker_top_bar_logo.png",
@@ -10,8 +10,8 @@
             "altText": "ValueChecker logo"
         },
         "contact": {
-            "name": "Support",
-            "url": "https://www.valuechecker.net/docs/api/pdf",
+            "name": "Contact",
+            "url": "https://www.valuechecker.net/contact/",
             "email": "support@valuechecker.net"
         }
     },
