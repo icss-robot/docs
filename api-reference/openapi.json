@@ -2961,11 +2961,13 @@
                                     },
                                     "date_claim": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "description": "The date of the submitted claim for this product."
                                     },
                                     "date_purchase": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "description": "The date of purchase as reported by the claimant."
                                     },
                                     "depr_extra_one_year_no_receipt": {
                                         "type": "boolean"
@@ -2974,13 +2976,15 @@
                                         "type": "integer"
                                     },
                                     "is_acv_cp_price_estimate_based": {
-                                        "type": "boolean"
+                                        "type": "boolean",
+                                        "description": "Base the ACV calculation on the value from `cp_price_estimate` (Purchase Price / Repair) instead of Replacement Cost"
                                     },
                                     "item_quantity": {
                                         "type": "integer"
                                     },
                                     "selected_client_category_id": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "description": "(Optional) The identifier for the category that the ACV algorithm is to use for calculation. This value is client specific. **Note**: This is not necessarily the same as or related to the product category (client category id) used for the Claimed Product search. Please ask your ValueChecker support contact for more information."
                                     },
                                     "update_time": {
                                         "type": "string",
