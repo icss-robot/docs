@@ -3,14 +3,148 @@ title: ValueChecker API Essentials
 ---
 
 ## Dynamic Settings
+The ValueChecker service is country specific and has many customization
+and flexible business options making the service client specific.\
+It is important to build your implementation with this in mind. Settings
+and access tokens (which are minted per client) should be easy to change
+in value and between different clients who may be using the same
+software implementation.\
+Passing correct query variables with the wrong token will gain you
+access to the API response but it will be empty in most cases. Please
+take care in managing the tokens and corresponding settings and
+configurations.
+
 ## Client Features
-### Filters Prices
-### Category Correction
-### Clustered Prices
-### Category Metadata
+There are a number of features that are available to tailor the
+ValueChecker API response and results to your needs. Most of these will
+be set by your ValueChecker representative, but the following settings
+can be requested to be toggled ON/OFF:
+
+### _Filters Prices_
+[Filtered prices](/api-reference/replacement-product-suggestions#filtered-prices)
+are removed from the [RP response](/api-reference/replacement-product-suggestions#response).
+<Note>Default is `TRUE`</Note>
+
+### _Category Correction_
+Requested categories are analyzed using prediction and switched when
+better results can be found in the [CP response](/api-reference/product-search#response-2).
+<Note>Default is `TRUE`</Note>
+
+### _Clustered Prices_
+Prices in `non`-[core categories](/before-getting-started/valuechecker-service-concepts#core-categories)
+are aggregated into [price buckets](/api-reference/product-search#aggregated-prices-a-k-a-clustered-prices)
+and returned in the [CP response](/api-reference/product-search#response-2).
+<Note>Default is `TRUE`</Note>
+
+### _Category Metadata_
+Category information is returned in the [CP response](/api-reference/product-search#response-2)
+as a metadata object.
+<Note>Default is `TRUE` for new clients. `FALSE` for existing clients until they migrate.</Note>
+
 ## Client Categories
+One of ValueCheckers strengths is its ability to adapt to many types of
+category configurations.\
+Some clients may use 2 categories of `Telephones` and `Tablets` while
+others may introduce a third middle range screen size as `Phablets`
+between the 2.\
+To adapt to this, we maintain a separate category taxonomy for each
+client. Categories are represented by an alphanumeric string
+(`client_category`) i.e. “Mobile phones” and a corresponding integer
+category identifier (`client_category_id`) i.e. 12345.
+
+To use the ValueChecker API you can pass either the client_category
+(recommended) or the client_category_id. E.g, if the client category
+“Tablets” has a client category id 123, then it will be equivalent to
+send a request using either client_category_id=123 or
+client_category=tablets.
+
 ### client_category usage
+Pass the category to both the Claimed Product and [Replacement Product](/api-reference/replacement-product-suggestions)
+endpoints as a formatted string.
+* The string is not case-sensitive.
+* Special alphabetic characters like “ø” are converted to their ASCII
+equivalent, in this case “o”.
+* Spaces and other special characters like “&” and “/” are disregarded,
+so the following examples are equivalent:
+    * “Audio / Video” and “Audio & Video”
+    * “Midi/Minisets” and “Midi / Minisets”
+    * “Make-Up - Aangebroken” and “Make-Up (Aangebroken)” 
+    * “Airconditioning (mobiel)” and “Airconditioning - Mobiel”
+
+This method also holds the following advantage: any client category that
+does not have a mapping (`client_category_id`) will be automatically
+processed. There is no need to wait until the _client_category_id_ is
+issued, making the implementation process simpler and faster.
+
+#### How this works:
+1. You use a client_category that has never been passed to the
+valuechecker API before: Example: “Android Tablets”.
+2. The API identifies it as a new category and creates a new mapping for
+this category using smart analysis (the extracted word “Tablets” is
+equal to our core category “Tablets”).
+    * If for some reason a mapping cannot be automatically assigned,
+    the request will continue in the generic category of “All Other
+    Products” until our QA team can manually ascertain the mapping. 
+3. That mapping (your category of “Android Tablets” to our core category
+“Tablets”) gets a client_category_id (i.e. 123) and is available in the
+next request to the [Client Categories](/api-reference/query-parameter-requests#get-client-information)
+endpoint.
+4. You can then continue using the client_category or the
+client_category_id for future requests to this category.
+
 ### client_category_id usage
+To use the ValueChecker API with the identifier you must always pass
+your client_category_id along with the request query to both the
+[Claimed Product](/api-reference/product-search)
+and [Replacement Product](/api-reference/replacement-product-suggestions)
+endpoints.
+<Warning>
+    It is absolutely required that these values are correct.
+    Passing an incorrect or outdated `client_category_id` will yield no
+    results!
+</Warning>
+We provide a [Client Categories](/api-reference/query-parameter-requests#get-client-categories)
+endpoint where you can fetch these values on demand to store them in a
+dynamic manner. These identifiers do not change often, but it is good
+practice to keep them regularly updated in an automated way.
+
 ## All Other Products
+We maintain a generic category named “All Other Products”. It may be
+called a different name according to your locale. You can find it in the
+Client Categories endpoint.\
+We recommend if you do not know the category in a particular search to
+omit sending any category information as our category prediction will
+find the best result based on analysis of the search string.\
+If you are not able to omit the category parameter, we recommend the
+user be able to enter the category as best as they can describe it using
+the client_category (string) parameter.\
+In the last resort cases you may use this category for any searches
+where you are not sure of the category or cannot find a suitable
+category or do not wish to allow the user to define their category.
+
 ## Session Identifiers
+A session identifier is a unique string passed as a parameter in certain
+requests that can be used by ValueChecker to aggregate actions by a
+single end user (i.e. a user of your integration).\
+This string can be:
+* a hashed value of a username or account id from your integration.
+* an application or framework assigned session id.
+* any other uniquely generated string - per end user.
+We use this identifier in our system health checks, anonymized usage
+analysis, and to help detect anomalies in your integration. 
+
 ## Multi-Client Users (MCU)
+If a user account is MCU enabled, you may use that user accounts API key
+to call data for any client that the user has permission to access.
+* Use the parameter client_id to specify which client you are requesting
+data from.
+* If you request a client that you do not have access to, you will
+receive an error response.
+* If your user is MCU enabled, the client_id is a required parameter on
+most endpoints. It is good practise to include the client_id in all your
+requests by default so that you do not need to make code change when
+enabling/disabling MCU.
+* If you send the parameter client_id when not MCU enabled, it is
+ignored with a 200 response.
+* If your user should be MCU enabled but is not, please contact
+support@valuechecker.ai
