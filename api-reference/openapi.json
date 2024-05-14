@@ -1647,7 +1647,8 @@
                         "schema": {
                             "type": "integer"
                         },
-                        "example": "1262828314"
+                        "example": "1262828314",
+                        "description": "The product identifier (usually selected from the product search response)."
                     },
                     {
                         "name": "country",
@@ -1655,7 +1656,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "{{country}}"
+                        "example": "{{country}}",
+                        "description": "The country in where prices will be searched."
                     },
                     {
                         "name": "client_category",
