@@ -1,14 +1,39 @@
 ---
-title: Step 1. Create Client Reference
+title: Create Client Reference
+sidebarTitle: Step 1. Create Client Reference
 ---
 
-## Request
-## Response
+import { EndpointButton } from '/snippets/endpoint-button.mdx';
+
+While not strictly required to use the ValueChecker API, it is good
+practice to create a Reference record prior to every usage session.
+Think of it as a shopping cart where Appraisal records are collected and
+can be modified prior to being retrieved into your system. The claim
+reference number of a policyholder's claim can also be used as the
+Client Reference. 
+
+<Note>
+If your implementation is only using the CP and RP steps, you may skip
+creating a reference. 
+</Note>
+
+Client references have a user defined label (`client_reference`) and a
+`client_reference_id`. The `client_reference_id` is used to interact with
+the ValueChecker API to identify a reference.
+
+<EndpointButton title="Create Client Reference Endpoint" href="/api-reference/default/client_reference-1" />
 
 # List All References
-## Request
-## Response
+To list your existing references (or ‘Carts’), you can use the same
+endpoint. This returns all references belonging to the user the token
+belongs to. 
+No parameters are required
+
+<EndpointButton title="All Client References Endpoint" href="/api-reference/default/client_reference" />
+
 
 # Display Specific Reference
-## Request
-## Response
+You should have a `client_reference_id` from [Step 1: Create Client
+Reference](/api-reference/create-client-reference) to use in the request path.
+
+<EndpointButton title="Get Specific Client Reference Endpoint" href="/api-reference/default/client_reference-2" />

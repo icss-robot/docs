@@ -762,7 +762,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "Reference 321"
+                        "example": "Reference 321",
+                        "description": "This must be unique to your client, otherwise we return an error. The response will contain the client_reference_id which is used in later calls."
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
