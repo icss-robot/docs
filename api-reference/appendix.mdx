@@ -3,14 +3,285 @@ title: APPENDIX
 ---
 
 ## Definitions
+**Claimed Product (CP)**
+* The product being claimed by the policyholder.
+
+**Item of Loss**
+* The item being claimed by the policyholder.
+
+
+**Replacement Product (RP)**
+* The product identified by ValueChecker and/or the Claims Handler to
+replace the product being claimed by the policyholder. Note: This can be
+the same product as the Claimed Product - if still available on the
+market at a reasonable price - or a different product of the same
+Like-Kind-and-Quality (LKQ).
+
+
+**Replacement Cost Value (RCV)**
+* The cost to replace the Claimed Product at the time of damage, thus
+the price to purchase the Replacement Product (RP).
+
+
+**Actual Cash Value (ACV)**
+* The calculated value of the Claimed Product after applying the
+insurer’s depreciation rules. Thus the ACV = RCV - Depreciation.
+
+
+**Depreciation**
+* A reduction - based on the rules of the insurer - in the value of the
+Claimed Product over time, due in particular to wear and tear.
+
+
+**vcid**
+* Identifier assigned to very specific groupings of similar products in
+ValueChecker, that have the same or similar price regardless of model.\
+Example: "Apple iPhone 7 32GB Gold", "Apple iPhone 7 32GB Black", etc.
+    <Note>
+    One vcid can only have 1 alid.
+    </Note>
+
+
+**alid**
+* Identifier assigned to broad groupings of similar products in
+ValueChecker, that are of the same model family but can have.\
+Example: Apple iPhone 7.
+    <Note>
+    One alid can have many vcid’s.
+    </Note>
+
+**Like-Kind-and-Quality (LKQ)**
+* A condition in property insurance policies that states that the
+insurer would cover the cost of repairing or replacing a covered loss
+("Claimed Product") with property ("Replacement Product") that is
+similar in composition and quality. The ValueChecker is calculating the
+Replacement Products for all Claimed Products that are in the
+Replacement Categories, based on multiple relevant product
+specifications defined for each individual category. As a general rule,
+for all Replacement Categories the Replacement Products should be of the
+same Brand and not of an older model family compared to the Claimed
+Product.
+
+
+**User**
+* The individual who uses ValueChecker during the claim handling
+process. This could be a Claim Handler or a Policyholder.
+
+
 ## Event Codes
 ### Event Segments
+Events codes are 6 character long strings constructed using segments
+that can be parsed to identify the error reason and API resource.
+
+There are 3 segments totalling 6 characters:
+**ABCDEF**
+
+The segment comprising the 1st and 2nd character denotes the Event
+Severity.
+
+| Segment | Description |
+| --- | --- |
+| **POS(1,2)** | Position 1 and 2 of the Event Code: SEVERITY |
+| ER | Prefix segment for events of severity `ERROR` |
+| WA | Prefix segment for events of severity `WARN` |
+| IN | Prefix segment for events of severity `INFO` |
+
+<Note>
+`WARN` and `INFO` events are not currently implemented as of this
+documentation. They will be added in an upcoming release.
+</Note>
+
 ### ERROR Events
+Calls to the ValueChecker API that result in an error for any reason
+will result in an error response. These event codes begin with **ER**.
+
+```json 400
+{
+    "event_code": "ERIPCS",
+    "event_dict": {
+        "event_severity": "ERROR",
+        "title": "Invalid parameter",
+        "description": "The \"client_category_id\" parameter is invalid. The value must be an integer."
+    },
+    "error": "Invalid parameter",
+    "description": "The \"client_category_id\" parameter is invalid. The value must be an integer.",
+}
+```
+
+<Info>
+The root keys of `error` and `description` are maintained for backwards
+compatibility and can be safely ignored. They are deprecated and will be
+removed in an upcoming release.
+</Info>
+
 ### Error Segment
+The segment comprising the 3rd and 4th character denotes the Error type
+(when the first segment is **ER**).\
+The segment comprising the 5th and 6th character denotes the Error
+location (resource).
+
+| Segment | Description |
+| --- | --- |
+| **POS(3,4)** | Position 3 and 4 of the Event Code: Type |
+| AE | Resource already exists |
+| IP | A passed parameter(s) is invalid (i.e. expecting INT, got STRING) |
+| IT | The bearer token is invalid |
+| MP | A required parameter is missing |
+| NA | Method requested is not allowed |
+| NF | Resource is not found |
+| WP | The value of passed parameter is wrong |
+| **POS(5,6)** | Position 3 and 4 of the Event Code: Location |
+| SS | The error was raised from /search_suggestion |
+| PS | The error was raised from /product_search |
+| PR | The error was raised from /prices |
+
+
 ## Status Codes
+All status codes are standard HTTP status codes.\
+The following status codes are used by the ValueChecker API.
+
+| Status Code | Description |
+| --- | --- |
+| 200 | OK |
+| 204 | No Content |
+| 400 | Bad Request |
+
 ## Depracated
 ### cid and category in response object for product_search
-#### Depraction warnings
+<Warning>
+Deprecated at version 0.20.70
+</Warning>
+
+```json 200
+{
+  "results": [
+    {
+      "child_products": [],
+      "pid": 1122795690,
+      "cid": 132,      
+      "category": "Laptops",
+      "client_category": "Laptops",
+      "client_category_id": 2000,
+      "product_name": "Asus Zenfone 9 8GB 5G 128GB White",
+      "Product_picture_url": "https://img.valuechecker.net/,..j",
+      "specs": [
+        {
+          "spec_id": 999,
+          "spec_name_display": "Marke",
+          "spec_value_display": "Asus",
+          "spec_value_numeric": 1.0,
+          "spec_name": "Marke"
+        }
+      ],
+      "price": {
+        "price": 790.0,
+        "price_url": "https://www.belsimpel.nl/asus-zen…",
+        "shop_count": 1,
+        "price_date": "2022-12-06 15:58:52"
+      },
+    },
+  ],
+  "metadata": {
+    "category": {
+      "requested_client_category_id": 1234,
+      "requested_client_category": "Laptops",
+      "prediction_certainty": 0.9978,
+      "predicted_client_category_id": 469,
+      "predicted_client_category": "Mobiele Telefoon",
+      "category_switched": true
+    },
+  "used_query": "asus zenfone 2015"
+  }
+}
+```
+
+#### Deprication warnings:
+* `cid` has been deprecated and will be removed in a future update.
+Please use the `client_category_id` directly instead.
+* `category` has been deprecated and will be removed in a future update.
+However, the `client_category` will return the same information.
+
 ### List Response for product_search
+<Warning>
+Deprecated at version 0.20.70
+</Warning>
+
+```json 200
+{
+    "claimed_product": {
+        "pid": 1008793454,
+        "cid": 132,
+        ...,
+        "client_category": "Television",
+        "client_category_id" 2000
+    },
+    "grouped_prices": [
+        [
+            {
+                "pid": 1008793454,
+                "shop_product_name": "LG 55SM9010PLA Zwart",
+            },
+        ],
+    ],
+}
+```
+
 #### Depraction warnings
+* `cid` has been deprecated and will be removed in a future update.
+Please use the `client_category_id` directly instead.
+
+The ValueChecker response for the product_search formatted as a list
+response has been migrated to an object response.\
+All clients currently using the list response should migrate to the
+object response **before April 1st, 2023**.
+
+Example list response. See the current [object response](/api-reference/product-search#extended-search).
+
+```json 200
+{
+    "child_products": [],
+    "pid": 1122795690,
+    "product_name": "Asus Zenfone 9 8GB 5G 128GB White",
+    "product_picture_url": "https://img.valuechecker.net/,...jpg",
+    "specs": [
+        {
+            "spec_id": 999,
+            "spec_name_display": "Marke",
+            "spec_value_display": "Asus",
+            "spec_value_numeric": 1.0,
+            "spec_name": "Marke"
+            },
+    ],
+    "price": {
+            "price": 790.0,
+            "price_url": "https://www.belsimpel.nl/asus-zen…",
+            "shop_count": 1,
+            "price_date": "2022-12-06 15:58:52"
+    },
+    "source": "Belsimpel",
+    ...,
+}
+```
+
 ### OAuth Authentication
+<Warning>
+Deprecated at version 0.12.45
+</Warning>
+
+ValueChecker uses the [OAuth 2.0](https://www.oauth.com/) standard for
+authentication.\
+Currently the authentication process of a new user to the system is
+handled internally by ValueChecker. You will be sent an access_token.
+(Type: **Bearer Token**.)\
+To get started using ValueChecker’s API, use the access_token as
+required for every request. Ask your ValueChecker contact for more
+information. 
+
+To include the access_token in a request, include it as an
+“Authorization” header.
+
+```bash curl example
+curl \
+-H "Authorization: apiKey zcwPhya.S23UR5cN....xFWLdKq2KRLX" \
+-X GET https://api.valuechecker.net/<endpoint>?query=param1&param2=40&param3=-1
+```
