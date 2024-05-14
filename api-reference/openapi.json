@@ -661,10 +661,12 @@
                                         "type": "object",
                                         "properties": {
                                             "client_category_id": {
-                                                "type": "integer"
+                                                "type": "integer",
+                                                "description": "This is an identifier used to help group and categorize the millions of consumer products in our database. It will be used as a request parameter in several of our API calls."
                                             },
                                             "client_category": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "description": "This is the display name for each product category."
                                             },
                                             "parent_client_category_id": {
                                                 "type": "integer"
@@ -673,7 +675,8 @@
                                                 "type": "boolean"
                                             },
                                             "cid": {
-                                                "type": "integer"
+                                                "type": "integer",
+                                                "description": "The cid is the identifier that matches the `client_category_id` to ValueChecker’s internal product categories. This value is for reference only and can be ignored."
                                             },
                                             "category": {
                                                 "type": "string"
@@ -685,10 +688,12 @@
                                                 "type": "boolean"
                                             },
                                             "has_replacement": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "description": "Shows whether the `client_category_id` is considered a “Replacement category” by ValueChecker. “Replacement Categories” represent product groupings that ValueChecker has defined Like-Kind-and-Quality replacement logic for -- which means a comprehensive search to find relevant Replacement Products based on objective specification values can be completed for products in these categories. All `client_category_id’s` where `has_replacement` = True are considered “Replacement Categories”. Where `has_replacement` = False, ValueChecker is still able to search for the product and find real-time pricing information; however, there is no ability to search for Replacement Products within these categories."
                                             },
                                             "acv_disabled": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "description": "Informs as to whether the category has depreciation calculations associated with it. Depreciation can be applied in the Calculate ACV call."
                                             },
                                             "show_closest_matches": {
                                                 "type": "boolean"
