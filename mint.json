@@ -16,8 +16,12 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Email",
       "url": "mailto:support@valuechecker.net"
+    },
+    {
+      "name": "Contact us",
+      "url": "https://www.valuechecker.net/contact/"
     }
   ],
   "tabs": [

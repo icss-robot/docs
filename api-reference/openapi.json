@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "ValueChecker API",
-        "description": "WIP. USE WITH CAUTION! <br>The ValueChecker Application Programming Interface.",
+        "description": "The ValueChecker Application Programming Interface.",
         "version": "0.20.70",
         "x-logo": {
             "url": "https://files.valuechecker.net/images/default-category-images/Value-Checker_top_bar_logo.png",
@@ -10,8 +10,8 @@
             "altText": "ValueChecker logo"
         },
         "contact": {
-            "name": "Support",
-            "url": "https://www.valuechecker.net/docs/api/pdf",
+            "name": "Contact",
+            "url": "https://www.valuechecker.net/contact/",
             "email": "support@valuechecker.net"
         }
     },
@@ -25,6 +25,496 @@
             "description": "ValueChecker API URL."
         }
     ],
+    "components": {
+        "securitySchemes": {
+            "apiKey": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        },
+        "parameters": {
+            "session-id": {
+                "name": "session-id",
+                "in": "query",
+                "schema": {
+                    "type": "string"
+                },
+                "example": "a1b2c3d4e5f6g7h8i9j0"
+            },
+            "client_id": {
+                "name": "client_id",
+                "in": "query",
+                "schema": {
+                    "type": "integer"
+                },
+                "example": 10
+            }
+        },
+        "responses": {
+            "401": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                },
+                                "event_code": {
+                                    "type": "string"
+                                },
+                                "event_dict": {
+                                    "type": "object",
+                                    "properties": {
+                                        "event_severity": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "example": {
+                            "error": "Invalid Authorization header",
+                            "event_code": "ERIT00",
+                            "event_dict": {
+                                "event_severity": "ERROR",
+                                "title": "Invalid Authorization header",
+                                "description": "Please provide the right authorization token"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "PriceRange": {
+                "type": "object",
+                "properties": {
+                    "price_min": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "price_max": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "shop_count": {
+                        "type": "integer"
+                    },
+                    "price_date": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Spec": {
+                "type": "object",
+                "properties": {
+                    "spec_id": {
+                        "type": "integer"
+                    },
+                    "spec_value": {
+                        "type": "string"
+                    },
+                    "spec_value_display": {
+                        "type": "string"
+                    },
+                    "spec_value_numeric": {
+                        "type": "number"
+                    },
+                    "spec_name": {
+                        "type": "string"
+                    },
+                    "spec_name_display": {
+                        "type": "string"
+                    }
+                }
+            },
+            "SearchSuggestionProduct": {
+                "type": "object",
+                "properties": {
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "cid": {
+                        "type": "integer"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/PriceRange"
+                    }
+                }
+            },
+            "SearchProduct": {
+                "type": "object",
+                "properties": {
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "cid": {
+                        "type": "integer"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "price": {
+                        "$ref": "#/components/schemas/PriceRange"
+                    },
+                    "price_clusters": {
+                        "$ref": "#/components/schemas/PriceClusters"
+                    },
+                    "child_products": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "child_product_contents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SearchSuggestionProduct"
+                        }
+                    }
+                }
+            },
+            "PriceClusterValue": {
+                "type": "object",
+                "properties": {
+                    "udc_id": {
+                        "type": "integer"
+                    },
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "count": {
+                        "type": "integer"
+                    },
+                    "percentage": {
+                        "type": "number"
+                    },
+                    "min_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "max_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    }
+                }
+            },
+            "PriceClusters": {
+                "type": "object",
+                "properties": {
+                    "low": {
+                        "$ref": "#/components/schemas/PriceClusterValue"
+                    },
+                    "medium": {
+                        "$ref": "#/components/schemas/PriceClusterValue"
+                    },
+                    "high": {
+                        "$ref": "#/components/schemas/PriceClusterValue"
+                    }
+                }
+            },
+            "ClaimedProduct": {
+                "type": "object",
+                "properties": {
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "master_name": {
+                        "type": "string"
+                    },
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "cid": {
+                        "type": "integer"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "product_url": {
+                        "type": "string"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "in_stock": {
+                        "type": "boolean"
+                    },
+                    "query_at_limit": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "GroupedPricesProduct": {
+                "type": "object",
+                "properties": {
+                    "pid": {
+                        "type": "integer"
+                    },
+                    "sid": {
+                        "type": "integer"
+                    },
+                    "source_internal_id": {
+                        "type": "string"
+                    },
+                    "master_name": {
+                        "type": "string"
+                    },
+                    "product_name": {
+                        "type": "string"
+                    },
+                    "master_pic_url": {
+                        "type": "string"
+                    },
+                    "pic_url": {
+                        "type": "string"
+                    },
+                    "product_pic_url": {
+                        "type": "string"
+                    },
+                    "product_url": {
+                        "type": "string"
+                    },
+                    "brand": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "object",
+                        "properties": {
+                            "price_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "rp_first_choice": {
+                        "type": "boolean"
+                    },
+                    "specs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Spec"
+                        }
+                    },
+                    "same_alid_as_cp": {
+                        "type": "boolean"
+                    },
+                    "score_perfect": {
+                        "type": "boolean"
+                    },
+                    "score": {
+                        "type": "number"
+                    },
+                    "is_user_defined_claim": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Shop": {
+                "type": "object",
+                "properties": {
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "shop_status": {
+                        "type": "integer"
+                    },
+                    "shop_score": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "PriceListElement": {
+                "type": "object",
+                "properties": {
+                    "shop_product_name": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "total_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "base_price": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "price_date": {
+                        "type": "string"
+                    },
+                    "offer_id": {
+                        "type": "integer"
+                    },
+                    "offer_url": {
+                        "type": "string"
+                    },
+                    "international": {
+                        "type": "boolean"
+                    },
+                    "is_refurbished": {
+                        "type": "boolean"
+                    },
+                    "in_stock": {
+                        "type": "boolean"
+                    },
+                    "blocked": {
+                        "type": "boolean"
+                    },
+                    "country_code": {
+                        "type": "string"
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/GroupedPricesProduct"
+                    },
+                    "shop": {
+                        "$ref": "#/components/schemas/Shop"
+                    },
+                    "filtered_price": {
+                        "type": "boolean"
+                    },
+                    "outside_price_range": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Appraisal": {
+                "type": "object",
+                "properties": {
+                    "appraisal_id": {
+                        "type": "integer"
+                    },
+                    "client_reference_id": {
+                        "type": "integer"
+                    },
+                    "cpid": {
+                        "type": "integer"
+                    },
+                    "rpid": {
+                        "type": "integer"
+                    },
+                    "create_time": {
+                        "type": "string"
+                    },
+                    "update_time": {
+                        "type": "string"
+                    },
+                    "cp_name_cart": {
+                        "type": "string"
+                    },
+                    "rp_name_cart": {
+                        "type": "string"
+                    },
+                    "cp_pic_url": {
+                        "type": "string"
+                    },
+                    "rp_pic_url": {
+                        "type": "string"
+                    },
+                    "is_user_defined_claim": {
+                        "type": "boolean"
+                    },
+                    "item_quantity": {
+                        "type": "integer"
+                    },
+                    "show_price_per_item": {
+                        "type": "boolean"
+                    },
+                    "replacement_cost_value": {
+                        "type": "number",
+                        "multipleOf": 0.01
+                    },
+                    "rp_price_date": {
+                        "type": "string"
+                    },
+                    "homepage_client_category_id": {
+                        "type": "integer"
+                    },
+                    "selected_client_category_id": {
+                        "type": "integer"
+                    },
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "shop_url": {
+                        "type": "string"
+                    },
+                    "is_acv_cp_price_estimate_based": {
+                        "type": "boolean"
+                    },
+                    "is_acv_claimed_damage_based": {
+                        "type": "boolean"
+                    },
+                    "depr_extra_one_year_no_receipt": {
+                        "type": "boolean"
+                    },
+                    "offer_id": {
+                        "type": "integer"
+                    },
+                    "file_count": {
+                        "type": "integer"
+                    },
+                    "row_id": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKey": []
+        }
+    ],
     "paths": {
         "/clients": {
             "get": {
@@ -34,21 +524,10 @@
                 "summary": "Client Information",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -89,7 +568,24 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "client_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_name": {
+                                                "type": "string"
+                                            },
+                                            "country_code": {
+                                                "type": "string"
+                                            },
+                                            "language": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": [
                                     {
@@ -101,6 +597,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -113,21 +612,10 @@
                 "summary": "All Client Categories",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -168,7 +656,45 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "client_category_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_category": {
+                                                "type": "string"
+                                            },
+                                            "parent_client_category_id": {
+                                                "type": "integer"
+                                            },
+                                            "is_group_category": {
+                                                "type": "boolean"
+                                            },
+                                            "cid": {
+                                                "type": "integer"
+                                            },
+                                            "category": {
+                                                "type": "string"
+                                            },
+                                            "api_sort_order": {
+                                                "type": "integer"
+                                            },
+                                            "has_depreciation": {
+                                                "type": "boolean"
+                                            },
+                                            "has_replacement": {
+                                                "type": "boolean"
+                                            },
+                                            "acv_disabled": {
+                                                "type": "boolean"
+                                            },
+                                            "show_closest_matches": {
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": [
                                     {
@@ -200,6 +726,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -211,18 +740,16 @@
                 ],
                 "summary": "Create Client Reference",
                 "requestBody": {
-                    "content": {}
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {}
+                            }
+                        }
+                    }
                 },
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference",
                         "in": "query",
@@ -233,12 +760,10 @@
                         "example": "Reference 321"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -279,7 +804,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "client_reference_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_reference": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "client_reference_id": 9337,
@@ -287,6 +820,54 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"client_reference\" parameter is required.",
+                                    "event_code": "ERMPCR",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The client_reference parameter is required."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             },
@@ -297,21 +878,10 @@
                 "summary": "All Client References",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
+                        "$ref": "#/components/parameters/client_id"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -352,7 +922,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "client_reference_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_reference": {
+                                            "type": "string"
+                                        },
+                                        "create_time": {
+                                            "type": "string"
+                                        },
+                                        "update_time": {
+                                            "type": "string"
+                                        },
+                                        "user_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_id": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 },
                                 "example": [
                                     {
@@ -366,6 +956,9 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }
@@ -378,15 +971,6 @@
                 "summary": "Get Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -395,12 +979,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -441,7 +1023,27 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "client_reference_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_reference": {
+                                            "type": "string"
+                                        },
+                                        "user_id": {
+                                            "type": "integer"
+                                        },
+                                        "client_id": {
+                                            "type": "integer"
+                                        },
+                                        "create_time": {
+                                            "type": "string"
+                                        },
+                                        "update_time": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "client_reference_id": 9337,
@@ -450,6 +1052,50 @@
                                     "client_id": 11,
                                     "create_time": "2023-07-25 11:10:05",
                                     "update_time": "2023-07-25 11:10:05"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNFCR",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The \"client_reference_id\" \"14418\" was not found"
+                                    }
                                 }
                             }
                         }
@@ -464,15 +1110,6 @@
                 ],
                 "summary": "CP: Fast Product Search",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "query",
                         "in": "query",
@@ -507,12 +1144,10 @@
                         "example": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -553,7 +1188,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SearchSuggestionProduct"
+                                            }
+                                        },
+                                        "query": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "results": [
@@ -672,6 +1318,31 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"query\" parameter is required."
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -683,15 +1354,6 @@
                 ],
                 "summary": "CP: Extended Product Search (core)",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "query",
                         "in": "query",
@@ -726,12 +1388,10 @@
                         "example": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -772,7 +1432,15 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "results": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SearchProduct"
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "results": [
@@ -830,7 +1498,7 @@
                                                 "shop_count": 10,
                                                 "price_date": "2022-09-11 20:40:16"
                                             },
-                                            "price_clusters": {
+                                            "PriceClusters": {
                                                 "low": {
                                                     "udc_id": 369929,
                                                     "pid": 1941916191,
@@ -921,6 +1589,31 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"query\" parameter is required."
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -932,15 +1625,6 @@
                 ],
                 "summary": "RP: Replacement Products",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "required": true,
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "pid",
                         "required": true,
@@ -975,12 +1659,10 @@
                         "example": "{{client_category_id}}"
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1021,7 +1703,21 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "claimed_product": {
+                                            "$ref": "#/components/schemas/ClaimedProduct"
+                                        },
+                                        "grouped_prices": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/PriceListElement"
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "claimed_product": {
@@ -1225,6 +1921,54 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Missing parameter",
+                                    "description": "The \"pid\" parameter is required.",
+                                    "event_code": "ERMPPR",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The \"pid\" parameter is required."
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1285,7 +2029,11 @@
                                         "type": "string",
                                         "format": "date-time"
                                     }
-                                }
+                                },
+                                "required": [
+                                    "cpid",
+                                    "rpid"
+                                ]
                             },
                             "example": {
                                 "client_id": "10",
@@ -1308,20 +2056,15 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
                             "type": "string"
                         },
                         "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1362,10 +2105,100 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "properties": {
+                                        "appraisal_id": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 },
                                 "example": {
                                     "appraisal_id": 97771
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "cpid : field required; rpid : field required",
+                                    "event_code": "ERMPAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The \"cpid\" parameter is required."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The client_reference_id \"14418\" was not found"
+                                    }
                                 }
                             }
                         }
@@ -1379,15 +2212,6 @@
                 "summary": "All Apprisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "required": true,
-                        "in": "header",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -1396,12 +2220,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1442,7 +2264,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appraisal"
+                                    }
                                 },
                                 "example": [
                                     {
@@ -1502,6 +2327,50 @@
                                 ]
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -1512,15 +2381,6 @@
                 "summary": "Delete All Appraisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -1529,12 +2389,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1574,6 +2432,50 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The client_reference_id \"14418\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1585,15 +2487,6 @@
                 ],
                 "summary": "Get Specific Appraisal",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -1611,12 +2504,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1657,7 +2548,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Appraisal"
                                 },
                                 "example": {
                                     "appraisal_id": 97773,
@@ -1685,6 +2576,50 @@
                                     "offer_id": 228246862,
                                     "file_count": 0,
                                     "row_id": 1
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
                                 }
                             }
                         }
@@ -1754,15 +2689,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -1779,12 +2705,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1830,6 +2754,50 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -1839,15 +2807,6 @@
                 ],
                 "summary": "Delete Specific Appraisal",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -1865,12 +2824,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -1908,6 +2865,50 @@
                                     "type": "object"
                                 },
                                 "example": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
                             }
                         }
                     }
@@ -1979,15 +2980,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -2004,12 +2996,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -2055,6 +3045,91 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "The replacement cost value is needed to calculate the ACV.",
+                                    "event_code": "ERMPAV",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Missing parameter",
+                                        "description": "The replacement_cost_value is needed to calculate the ACV."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -2064,15 +3139,6 @@
                 ],
                 "summary": "Delete ACV Calculation",
                 "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
                     {
                         "name": "client_reference_id",
                         "in": "path",
@@ -2090,12 +3156,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -2135,6 +3199,50 @@
                                 "example": {}
                             }
                         }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2168,15 +3276,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -2185,12 +3284,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -2231,9 +3328,53 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "string"
                                 },
                                 "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 1583693-11.pdf"
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 14418 was not found",
+                                    "event_code": "ERNF00",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong 'client_reference_id' value",
+                                        "description": "The client_reference_id '14418' was not found"
+                                    }
+                                }
                             }
                         }
                     }
@@ -2269,15 +3410,6 @@
                 },
                 "parameters": [
                     {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "example": "apiKey ABC123"
-                    },
-                    {
                         "name": "client_reference_id",
                         "in": "path",
                         "schema": {
@@ -2294,12 +3426,10 @@
                         "required": true
                     },
                     {
-                        "name": "client_id",
-                        "in": "query",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "example": 10
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
                     }
                 ],
                 "responses": {
@@ -2340,9 +3470,53 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
+                                    "type": "string"
                                 },
                                 "example": "https://files.valuechecker.net/reports/ValueChecker Claim Report - james bond - 2023-7-26 97893.pdf"
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Appraisal id 239055 was not found",
+                                    "event_code": "ERNFAP",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"appraisal_id\" value",
+                                        "description": "The appraisal_id \"239055\" was not found"
+                                    }
+                                }
                             }
                         }
                     }
