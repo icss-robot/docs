@@ -40,7 +40,8 @@
                 "schema": {
                     "type": "string"
                 },
-                "example": "a1b2c3d4e5f6g7h8i9j0"
+                "example": "a1b2c3d4e5f6g7h8i9j0",
+                "description": "Optional session identifier of the user."
             },
             "client_id": {
                 "name": "client_id",
@@ -661,10 +662,12 @@
                                         "type": "object",
                                         "properties": {
                                             "client_category_id": {
-                                                "type": "integer"
+                                                "type": "integer",
+                                                "description": "This is an identifier used to help group and categorize the millions of consumer products in our database. It will be used as a request parameter in several of our API calls."
                                             },
                                             "client_category": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "description": "This is the display name for each product category."
                                             },
                                             "parent_client_category_id": {
                                                 "type": "integer"
@@ -673,7 +676,8 @@
                                                 "type": "boolean"
                                             },
                                             "cid": {
-                                                "type": "integer"
+                                                "type": "integer",
+                                                "description": "The cid is the identifier that matches the `client_category_id` to ValueChecker’s internal product categories. This value is for reference only and can be ignored."
                                             },
                                             "category": {
                                                 "type": "string"
@@ -685,10 +689,12 @@
                                                 "type": "boolean"
                                             },
                                             "has_replacement": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "description": "Shows whether the `client_category_id` is considered a “Replacement category” by ValueChecker. “Replacement Categories” represent product groupings that ValueChecker has defined Like-Kind-and-Quality replacement logic for -- which means a comprehensive search to find relevant Replacement Products based on objective specification values can be completed for products in these categories. All `client_category_id’s` where `has_replacement` = True are considered “Replacement Categories”. Where `has_replacement` = False, ValueChecker is still able to search for the product and find real-time pricing information; however, there is no ability to search for Replacement Products within these categories."
                                             },
                                             "acv_disabled": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "description": "Informs as to whether the category has depreciation calculations associated with it. Depreciation can be applied in the Calculate ACV call."
                                             },
                                             "show_closest_matches": {
                                                 "type": "boolean"
@@ -757,7 +763,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "Reference 321"
+                        "example": "Reference 321",
+                        "description": "This must be unique to your client, otherwise we return an error. The response will contain the client_reference_id which is used in later calls."
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -1117,7 +1124,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "{{query}}"
+                        "example": "{{query}}",
+                        "description": "User-input string. The **user** should enter the name of the product being claimed / searched for."
                     },
                     {
                         "name": "client_category",
@@ -1125,7 +1133,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "{{client_category}}"
+                        "example": "{{client_category}}",
+                        "description": "Optional category selected or defined by the **user**."
                     },
                     {
                         "name": "client_category_id",
@@ -1133,7 +1142,8 @@
                         "schema": {
                             "type": "integer"
                         },
-                        "example": "{{client_category_id}}"
+                        "example": "{{client_category_id}}",
+                        "description": "Optional correlating ID of the category selected by the **user**."
                     },
                     {
                         "name": "force_client_category",
@@ -1141,7 +1151,8 @@
                         "schema": {
                             "type": "boolean"
                         },
-                        "example": true
+                        "example": true,
+                        "description": "Optional flag to force the use of the requested category."
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -1361,7 +1372,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "{{query}}"
+                        "example": "{{query}}",
+                        "description": "User-input string. The **user** should enter the name of the product being claimed / searched for."
                     },
                     {
                         "name": "client_category_id",
@@ -1369,7 +1381,8 @@
                         "schema": {
                             "type": "integer"
                         },
-                        "example": "{{client_category_id}}"
+                        "example": "{{client_category_id}}",
+                        "description": "Optional correlating ID of the category selected by the **user**."
                     },
                     {
                         "name": "client_category",
@@ -1377,7 +1390,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "{{client_category}}"
+                        "example": "{{client_category}}",
+                        "description": "Optional category selected or defined by the **user**."
                     },
                     {
                         "name": "force_client_category",
@@ -1385,7 +1399,8 @@
                         "schema": {
                             "type": "boolean"
                         },
-                        "example": true
+                        "example": true,
+                        "description": "Optional flag to force the use of the requested category."
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -1632,7 +1647,8 @@
                         "schema": {
                             "type": "integer"
                         },
-                        "example": "1262828314"
+                        "example": "1262828314",
+                        "description": "The product identifier (usually selected from the product search response)."
                     },
                     {
                         "name": "country",
@@ -1640,7 +1656,8 @@
                         "schema": {
                             "type": "string"
                         },
-                        "example": "{{country}}"
+                        "example": "{{country}}",
+                        "description": "The country in where prices will be searched."
                     },
                     {
                         "name": "client_category",
@@ -1992,10 +2009,12 @@
                                         "type": "string"
                                     },
                                     "cpid": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "description": "This is the Claimed Product Identifier. You should have this value from the previous response Step 3: (RP) from field `claimed_product.pid`."
                                     },
                                     "rpid": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "description": "This is the Replacement Product Identifier. The previous response should have one or more Replacement Products. You should take the value from whichever product you select from field `grouped_prices.[Y].[X].pid` (where X is the numbered product of the Y numbered group)."
                                     },
                                     "homepage_client_category_id": {
                                         "type": "integer"
@@ -2023,7 +2042,8 @@
                                     },
                                     "replacement_cost_value": {
                                         "type": "number",
-                                        "multipleOf": 0.01
+                                        "multipleOf": 0.01,
+                                        "description": "This is an optional variable parameter. You can either use the price from the previous response from field `grouped_prices.[Y].[X].total_price` or you can set a custom value based on your own logic."
                                     },
                                     "rp_price_date": {
                                         "type": "string",
@@ -2638,13 +2658,16 @@
                                 "type": "object",
                                 "properties": {
                                     "rpid": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "description": "This is the Replacement Product Identifier. The previous response should have one or more Replacement Products. You should take the value from whichever product you select from field `grouped_prices.[Y].[X].pid` (where X is the numbered product of the Y numbered group)."
                                     },
                                     "cp_name_cart": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "description": "Custom name for the claimed product (the cpid cannot be changed)."
                                     },
                                     "rp_name_cart": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "description": "Custom name for the replacement product."
                                     },
                                     "rp_pic_url": {
                                         "type": "string"
@@ -2655,11 +2678,13 @@
                                     },
                                     "replacement_cost_value": {
                                         "type": "number",
-                                        "multipleOf": 0.01
+                                        "multipleOf": 0.01,
+                                        "description": "Modified product price."
                                     },
                                     "cp_price_estimate": {
                                         "type": "number",
-                                        "multipleOf": 0.01
+                                        "multipleOf": 0.01,
+                                        "description": "The value claimed by the policyholder (Purchase Price / Repair)."
                                     },
                                     "offer_id": {
                                         "type": "integer"
@@ -2936,11 +2961,13 @@
                                     },
                                     "date_claim": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "description": "The date of the submitted claim for this product."
                                     },
                                     "date_purchase": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "description": "The date of purchase as reported by the claimant."
                                     },
                                     "depr_extra_one_year_no_receipt": {
                                         "type": "boolean"
@@ -2949,13 +2976,15 @@
                                         "type": "integer"
                                     },
                                     "is_acv_cp_price_estimate_based": {
-                                        "type": "boolean"
+                                        "type": "boolean",
+                                        "description": "Base the ACV calculation on the value from `cp_price_estimate` (Purchase Price / Repair) instead of Replacement Cost"
                                     },
                                     "item_quantity": {
                                         "type": "integer"
                                     },
                                     "selected_client_category_id": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "description": "(Optional) The identifier for the category that the ACV algorithm is to use for calculation. This value is client specific. **Note**: This is not necessarily the same as or related to the product category (client category id) used for the Claimed Product search. Please ask your ValueChecker support contact for more information."
                                     },
                                     "update_time": {
                                         "type": "string",

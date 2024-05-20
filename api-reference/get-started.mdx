@@ -2,5 +2,34 @@
 title: Get Started
 ---
 
+<Note>
+_All response examples are snippets. Some fields may be truncated and should be ignored.._
+</Note>
+
 ## API URL Path
+The HTTP path to the valuechecker API is:
+> https://api.valuechecker.net
+
+There is only 1 accessible version and any changes to the path when new
+generations are deployed will be updated in the documentation
+accordingly.
+
 ## Authentication
+ValueChecker uses API keys for authentication.\
+You will receive an API key which you will provide on every request to
+the API. If you do not have a key, ask your ValueChecker contact. 
+
+To pass the API key in a request, use the “Authorization” header.
+Prefix the key with “apiKey”.
+```bash curl example
+curl \
+-H "Authorization: apiKey zcwPhya.S23UR5cN....xFWLdKq2KRLX" \
+-X GET https://api.valuechecker.net/<endpoint>?query=param1&param2=40&param3=-1
+```
+
+You may request multiple API keys and call the ValueChecker API concurrently.
+
+<Warning>
+If you are still using a (deprecated) OAuth token, see [OAuth
+Authentication](/api-reference/appendix#oauth-authentication).
+</Warning>

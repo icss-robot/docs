@@ -1,3 +1,51 @@
 ---
 title: Minimal Implementation
 ---
+
+1. Search by a `query` string and a category to identify the
+Claimed Product (CP).
+
+> \{api_url_path\}/query=iphone 11 64&client_category=Mobile%20Phones
+```json excerpt
+{
+    "product_name": "Apple iPhone 11 64GB",
+    "pid": 1032089319,
+}
+```
+
+2. Search using a pid to return Replacement Product (RP) suggestions and
+prices.
+<Tip>
+    For locale pricing purposes, country is also a required variable.
+</Tip>
+
+> \{api_url_path\}/prices?pid=1032089319&country=nl
+```json excerpt
+{
+    "claimed_product": {
+        "master_name": "Apple iPhone 11 64GB",
+        "pic_url": "https://img.valuechecker.net/,sxDbsr...",
+        "product_name": "Apple iPhone 11 64GB Wit"
+    },
+    "grouped_prices": [
+        [
+            {
+                    "currency": "EUR",
+                    "in_stock": true,
+                    "offer_url": "https://{offer_url}/abcde123456abf1234",
+                    "price_date": "2020-08-26 16:45:45",
+                    "product": {
+                        "master_name": "Apple iPhone 11 64GB",
+                        "pic_url": "https://img.valuechecker.net/,sxDbsr...",
+                        "product_name": "Apple iPhone 11 64GB Wit",
+                    },
+                    "shop": {
+                        "shop_name": "belsimpel.nl",
+                    },
+                "total_price": 694.00
+                }
+            }   
+        ]
+    ]
+}
+```

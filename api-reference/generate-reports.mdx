@@ -1,11 +1,40 @@
 ---
-title: Step 6. Generate Reports
+title: Generate Reports
+sidebarTitle: Step 6. Generate Reports
 ---
 
+import { EndpointButton } from '/snippets/endpoint-button.mdx';
+
+<Warning>
+The endpoint **/client_reference** has restricted availability. Any
+calls to it will result in a 404 response. You can request access from
+your ValueChecker representative.
+</Warning>
+
+ValueChecker reports can be generated at the Client Reference level
+(multiple Appraisals) or on a specific Appraisal.\
+The response in both cases is a unique link to the document in PDF
+format.
+
 # Reference Report
-## Request
-## Response
+The generated document lists all Appraisals from a Reference:
+* Claimed products 
+* Replacement products
+* Offer links
+* Product prices
+* Actual Cash Values (ACV)
+
+<EndpointButton title="Create Report For Client Reference Endpoint" href="/api-reference/default/client_reference-report" />
 
 # Appraisal Report
-## Request
-## Response
+This document lists all details from a specific Appraisal:
+* Claimed products 
+* Replacement products
+* Offer links
+* Product prices
+* Actual Cash Values (ACV)
+
+The layout is presented in a user-friendly format that can be shared
+with [Claimants](/before-getting-started/valuechecker-service-concepts#users-and-policyholders).
+
+<EndpointButton title="Create Report For Appraisal Endpoint" href="/api-reference/default/client_reference-appraisal-report" />

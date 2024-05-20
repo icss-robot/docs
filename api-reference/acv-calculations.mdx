@@ -1,11 +1,27 @@
 ---
-title: Step 5. ACV Calculations
+title: ACV Calculations
+sidebarTitle: Step 5. ACV Calculations
 ---
 
+import { EndpointButton } from '/snippets/endpoint-button.mdx';
+
+<Warning>
+The endpoint **/client_reference** has restricted availability. Any
+calls to it will result in a 404 response. You can request access from
+your ValueChecker representative.
+</Warning>
+
+ValueChecker is able to calculate payouts (before standard deductions
+apply) by using the depreciation values provided by the insurance
+company. This is accomplished by providing user-input parameters like
+the date of damage and the date of purchase in the request -- along with
+other, previously obtained parameters detailed below.
+
+
 # Perform an ACV Calculation
-## Request
-## Response
+
+<EndpointButton title="Perform ACV Calculation Endpoint" href="/api-reference/default/client_reference-appraisal-acv" />
 
 # Reset an ACV Calculation
-## Request
-## Response
+
+<EndpointButton title="Delete ACV Calculation Endpoint" href="/api-reference/default/client_reference-appraisal-acv-1" />

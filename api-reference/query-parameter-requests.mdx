@@ -2,9 +2,33 @@
 title: Query Parameter Requests
 ---
 
+import { EndpointButton } from '/snippets/endpoint-button.mdx';
+
+These calls will be used to get parameter values needed for other calls.
+Since we are continuously improving our service, we recommend that our
+clients call these endpoints once a month to account for changes or
+additions we make to the system.  
+
 ## Get Client Information
-### Request
-### Response
+<Info>
+    `client_id`, `country_code`, and `language` are the parameters
+    needed for future calls. Other parameters in the response can be 
+    ignored.
+</Info>
+
+<EndpointButton title="Client Information Endpoint" href="/api-reference/default/clients" />
+
 ## Get Client Categories
-### Request
-### Response
+<Info>
+Client categories are not required if you intend to use [category
+strings](/before-getting-started/valuechecker-api-essentials#client-category-usage).
+</Info>
+
+If you decide to use ids, the client_category_id values will be used in
+several other requests. These ids represent each of the product
+categories that we recognize, define and assign to products in our
+catalog (translated in your local language). For example, Laptops, Cell
+Phones, Washing Machines and Tablets are some of the categories that
+will be returned.
+
+<EndpointButton title="Client Categories Endpoint" href="/api-reference/default/client_categories" />
