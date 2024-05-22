@@ -20,7 +20,7 @@ ValueChecker API response and results to your needs. Most of these will
 be set by your ValueChecker representative, but the following settings
 can be requested to be toggled ON/OFF:
 
-### _Filters Prices_
+### _Filtered Prices_
 [Filtered prices](/api-reference/replacement-product-suggestions#filtered-prices)
 are removed from the [RP response](/api-reference/replacement-product-suggestions#response).
 <Note>Default is `TRUE`</Note>
@@ -52,14 +52,15 @@ client. Categories are represented by an alphanumeric string
 (`client_category`) i.e. “Mobile phones” and a corresponding integer
 category identifier (`client_category_id`) i.e. 12345.
 
-To use the ValueChecker API you can pass either the client_category
-(recommended) or the client_category_id. E.g, if the client category
+To use the ValueChecker API you can pass either the `client_category`
+(recommended) or the `client_category_id`. E.g, if the client category
 “Tablets” has a client category id 123, then it will be equivalent to
-send a request using either client_category_id=123 or
-client_category=tablets.
+send a request using either `client_category_id`=123 or
+`client_category`=tablets.
 
 ### client_category usage
-Pass the category to both the Claimed Product and [Replacement Product](/api-reference/replacement-product-suggestions)
+Pass the category to both the [Claimed Product](/api-reference/product-search)
+and [Replacement Product](/api-reference/replacement-product-suggestions)
 endpoints as a formatted string.
 * The string is not case-sensitive.
 * Special alphabetic characters like “ø” are converted to their ASCII
@@ -73,11 +74,11 @@ so the following examples are equivalent:
 
 This method also holds the following advantage: any client category that
 does not have a mapping (`client_category_id`) will be automatically
-processed. There is no need to wait until the _client_category_id_ is
+processed. There is no need to wait until the `client_category_id` is
 issued, making the implementation process simpler and faster.
 
 #### How this works:
-1. You use a client_category that has never been passed to the
+1. You use a `client_category` that has never been passed to the
 valuechecker API before: Example: “Android Tablets”.
 2. The API identifies it as a new category and creates a new mapping for
 this category using smart analysis (the extracted word “Tablets” is
@@ -86,15 +87,15 @@ equal to our core category “Tablets”).
     the request will continue in the generic category of “All Other
     Products” until our QA team can manually ascertain the mapping. 
 3. That mapping (your category of “Android Tablets” to our core category
-“Tablets”) gets a client_category_id (i.e. 123) and is available in the
+“Tablets”) gets a `client_category_id` (i.e. 123) and is available in the
 next request to the [Client Categories](/api-reference/query-parameter-requests#get-client-information)
 endpoint.
-4. You can then continue using the client_category or the
-client_category_id for future requests to this category.
+4. You can then continue using the `client_category` or the
+`client_category_id` for future requests to this category.
 
 ### client_category_id usage
 To use the ValueChecker API with the identifier you must always pass
-your client_category_id along with the request query to both the
+your `client_category_id` along with the request query to both the
 [Claimed Product](/api-reference/product-search)
 and [Replacement Product](/api-reference/replacement-product-suggestions)
 endpoints.
@@ -117,7 +118,7 @@ omit sending any category information as our category prediction will
 find the best result based on analysis of the search string.\
 If you are not able to omit the category parameter, we recommend the
 user be able to enter the category as best as they can describe it using
-the client_category (string) parameter.\
+the `client_category` (string) parameter.\
 In the last resort cases you may use this category for any searches
 where you are not sure of the category or cannot find a suitable
 category or do not wish to allow the user to define their category.
@@ -136,15 +137,15 @@ analysis, and to help detect anomalies in your integration.
 ## Multi-Client Users (MCU)
 If a user account is MCU enabled, you may use that user accounts API key
 to call data for any client that the user has permission to access.
-* Use the parameter client_id to specify which client you are requesting
+* Use the parameter `client_id` to specify which client you are requesting
 data from.
 * If you request a client that you do not have access to, you will
 receive an error response.
-* If your user is MCU enabled, the client_id is a required parameter on
-most endpoints. It is good practise to include the client_id in all your
+* If your user is MCU enabled, the `client_id` is a required parameter on
+most endpoints. It is good practise to include the `client_id` in all your
 requests by default so that you do not need to make code change when
 enabling/disabling MCU.
-* If you send the parameter client_id when not MCU enabled, it is
+* If you send the parameter `client_id` when not MCU enabled, it is
 ignored with a 200 response.
 * If your user should be MCU enabled but is not, please contact
 support@valuechecker.ai
