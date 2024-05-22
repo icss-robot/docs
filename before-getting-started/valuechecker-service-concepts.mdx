@@ -25,7 +25,28 @@ aggregation, analysis, comparison and matching technology. To use this
 system in its most powerful form and realize the maximum cost savings
 this system can provide it should be used in a sequential manner. Each
 subsequent action adds further value to the flow. 
-[diagram placeholder]
+```mermaid
+graph LR
+    A["<div style='text-align:center;'>
+            <div style='fill:#; border:1px solid black; padding:10px; border-radius: 15px;'>Claimed Product<br><small>Product Identification</small></div>
+            <div style='margin-top: 10px;'>Typically an item of loss, damage<br>or otherwise affected put forth by a claimant</div>
+        </div>"]
+    B["<div style='text-align:center;'>
+            <div style='border:1px solid black; padding:10px; background-color: #cfe2f3; border-radius: 15px;'>Replacement Product<br><small>Available Replacement</small></div>
+            <div style='margin-top: 10px;'>A product of equal or greater value<br>compared by specification and price,<br>available in the region of the claimant</div>
+        </div>"]
+    C["<div style='text-align:center;'>
+            <div style='border:1px solid black; padding:10px; background-color: #d9ead3; border-radius: 15px;'>Appraisal<br><small>Calculated savings</small></div>
+            <div style='margin-top: 10px;'>An object comprised of the CP,<br>the selected RP and any<br>additional calculations</div>
+        </div>"]
+
+    A --> B
+    B --> C
+
+    style A fill:#ffffff,stroke:#333,stroke-width:0px
+    style B fill:#cfe2f3,stroke:#333,stroke-width:0px
+    style C fill:#d9ead3,stroke:#333,stroke-width:0px
+```
 
 ## Claimed Product: CP
 To deliver the bestLike-Kind-and-Quality replacement suggestions,
