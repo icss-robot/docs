@@ -5,15 +5,18 @@ sidebarTitle: Step 3. Replacement Product Suggestions
 
 import { EndpointButton } from '/snippets/endpoint-button.mdx';
 
-Using the pid provided in this request (the returned value of the
-selected Claimed Product in the [Product Search](/api-reference/product-search)
+Using the `pid` provided in this request (the returned value of the
+selected [Claimed Product](/before-getting-started/valuechecker-service-concepts#claimed-product-cp)
+in the [Product Search](/api-reference/product-search)
 step), ValueChecker will suggest similar products based on relevant
 specifications, - the product that is selected during this step is
 referred to as the Replacement Product. It’s worth noting that a
-suggested Replacement Product could have the same pid as the Claimed 
-Product if the Claimed Product is still for sale and in many cases the
-Replacement Product will share a very similar or identical product_name
-with the Claimed Product. 
+suggested Replacement Product could have the same `pid` as the
+[Claimed Product](/before-getting-started/valuechecker-service-concepts#claimed-product-cp)
+if the [Claimed Product](/before-getting-started/valuechecker-service-concepts#claimed-product-cp)
+is still for sale and in many cases the Replacement Product will share a
+very similar or identical product_name with the
+[Claimed Product](/before-getting-started/valuechecker-service-concepts#claimed-product-cp). 
 
 The response is a list of price groups, where each group is an array of
 the prices found for one product, sorted first by Recommended Shop and
@@ -29,7 +32,7 @@ ValueChecker has a default list of shops that are trustworthy
 specifics. Get in touch with your ValueChecker contact to make shop
 settings changes.\
 If your implementation requires only 1 replacement price, take the
-total_price value from the first product of the first group in the list
+`total_price` value from the first product of the first group in the list
 for the lowest available price from a recommended shop.
 
 **Example:**\
@@ -69,22 +72,22 @@ recent valid price that ValueChecker has stored for the Claimed Product.
 It can be used as historical data but should not be shown as the current
 ValueChecker suggested replacement price.\
 When available it will be included in the `claimed_product` object if no
-current valid prices for the Claimed Product are found in the current
-market. It is also included in the `grouped_prices` object as a
-filtered_price replacement if no other current prices are available for
-any possible replacement.
+current valid prices for the [Claimed Product](/before-getting-started/valuechecker-service-concepts#claimed-product-cp)
+are found in the current market. It is also included in the
+`grouped_prices` object as a `filtered_price` replacement if no other
+current prices are available for any possible replacement.
 
 We additionally return prices that have been [filtered out](/api-reference/replacement-product-suggestions#filtered-prices)
 by us but can still be selected as a viable replacement product if the
 user opts to do so.
 
 ### Filtered Prices
-Filtered prices are defined by the boolean `filtered_price`.\ 
+Filtered prices are defined by the boolean `filtered_price`.\
 The default setting for parsing the prices results should always screen
 out filtered prices. Price entries with `filtered_price = true` should
 be hidden in your result set. These prices are included in the response
 for special business cases and for your historical analysis as the
-values may change often (for example: the "in stock" status can change
+values may change often (for example: the "`in_stock`" status can change
 often - thereby switching the filtered status).
 The 4 cases where `filtered_price = true` (ValueChecker considers as a
 filtered price but still returns the data in the response) are as

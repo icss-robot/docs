@@ -17,7 +17,7 @@ interact with the ValueChecker API. Traditionally, they are doing so on
 behalf of a third party (such as an Insurance company or a Claim
 Handling company). In the case where the ValueChecker is being
 implemented into a frontend solution (such as First Notice of Loss web
-forms or mobile apps), the Policyholders are the `user`.
+forms or mobile apps), the Policyholders are the `users`.
 
 ## Sequential Task FLow
 The ValueChecker API is a wrapper on top of a robust system of data
@@ -80,10 +80,10 @@ shop).
 At the heart of the ValueChecker service is our Replacement Product
 technology. It calculates not only what would be suitable
 Like-Kind-and-Quality replacement products for the claimed product
-(using our internal product identifier, the PID) but also where it is
+(using our internal product identifier, the `PID`) but also where it is
 available for sale and at what price in the country of claim. The
 [Replacement Product endpoint](/api-reference/default/prices) requires a
-PID to perform these calculations.
+`PID` to perform these calculations.
 
 ## Appraisals
 An Appraisal is a dataset of a CP, an RP and any calculations performed
