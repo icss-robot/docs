@@ -36,6 +36,12 @@
   ],
   "navigation": [
     {
+      "group": "Welcome",
+      "pages": [
+        "introduction"
+      ]
+    },
+    {
       "group": "Before Getting Started",
       "pages": [
         "before-getting-started/valuechecker-service-concepts",
