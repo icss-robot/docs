@@ -24,6 +24,10 @@
       "url": "https://www.valuechecker.net/contact/"
     }
   ],
+  "topbarCtaButton": {
+    "name": "OAS",
+    "url": "https://storage.googleapis.com/vc2-public-files/api-docs/openapi.json"
+  },
   "tabs": [
     {
       "name": "API Reference",
