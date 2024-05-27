@@ -50,6 +50,14 @@
       ]
     },
     {
+      "group": "Roadmap",
+      "pages": [
+        "roadmap/announcements",
+        "roadmap/upcoming-features",
+        "roadmap/deprecation"
+      ]
+    },
+    {
       "group": "API Documentation",
       "pages": [
         "api-reference/get-started",
