@@ -6,12 +6,12 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#0073EA",
+    "light": "#338FEE",
+    "dark": "#0073EA",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#0073EA",
+      "to": "#338FEE"
     }
   },
   "topbarLinks": [
@@ -20,10 +20,14 @@
       "url": "mailto:support@valuechecker.net"
     },
     {
-      "name": "Contact us",
+      "name": "Contact",
       "url": "https://www.valuechecker.net/contact/"
     }
   ],
+  "topbarCtaButton": {
+    "name": "OAS",
+    "url": "https://storage.googleapis.com/vc2-public-files/api-docs/openapi.json"
+  },
   "tabs": [
     {
       "name": "API Reference",
@@ -32,11 +36,25 @@
   ],
   "navigation": [
     {
+      "group": "Welcome",
+      "pages": [
+        "introduction"
+      ]
+    },
+    {
       "group": "Before Getting Started",
       "pages": [
         "before-getting-started/valuechecker-service-concepts",
         "before-getting-started/valuechecker-api-essentials",
         "before-getting-started/minimal-implementation"
+      ]
+    },
+    {
+      "group": "Roadmap",
+      "pages": [
+        "roadmap/announcements",
+        "roadmap/upcoming-features",
+        "roadmap/deprecation"
       ]
     },
     {

@@ -73,7 +73,7 @@ drop-down/list/other similar UI component be used for selection
 purposes) to be passed as a parameter in the call for the claimed
 product being searched for.\
 There is support for the user to also be allowed to define their own
-category which you pass to the API with the client_category parameter.
+category which you pass to the API with the `client_category` parameter.
 
 <Warning>
 Important: This feature is only available for our catalog categories
@@ -107,7 +107,7 @@ or when we do not have any Master products matching their search query
 </Note>
 
 <Note>
-**Language:** The specification name (spec_name) values are currently
+**Language:** The specification name (`spec_name`) values are currently
 only returned in lowercase English (please cast to the preferred format
 of your locale i.e. "Title Case" or "Camel Case" etc..).\
 Serving translations for the default locale of the requesting client
@@ -179,14 +179,14 @@ updating implementation (such as "search as you type" etc..).
 }
 ```
 
-### Deprication warnings
+### Deprecation warnings
 * `cid` has been deprecated and will be removed in a future update.
 Please use the `client_category_id` directly instead.
 * `category` has been deprecated and will be removed in a future update.
 However, the `client_category` will return the same information.
 
 
-If at least 1 `pid` is returned, use a pid to continue to
+If at least 1 `pid` is returned, use a `pid` to continue to
 [Replacement Suggestions and Prices](/api-reference/replacement-product-suggestions).
 
 The response example also shows the [Category Correction](/api-reference/product-search#category-correction)
