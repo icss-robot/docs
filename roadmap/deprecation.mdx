@@ -2,6 +2,72 @@
 title: Deprecation
 ---
 
-<Tip>
-Coming soon!
-</Tip>
+<Warning>Please pay attention to the status of each entry</Warning>
+
+<Card title="Unsupported" icon="handshake-slash" horizontal="true">
+  The feature may still be present or functional but ValueChecker does not support or recommend its usage
+  and may drop it completely at any time.
+</Card>
+<Card title="Removed" icon="square-minus" horizontal="true">
+  The feature is completely removed from the ValueChecker API.
+</Card>
+<Card title="Breaking Change" icon="biohazard" horizontal="true">
+  The change REQUIRES an update in your implementation if you used a previous version or variant.
+</Card>
+
+## <Icon icon="timeline" size={24} /> Recent Deprecations
+
+|     Date     | Version |                     S                     | Description                                                            |
+| :----------: | :-----: | :---------------------------------------: | :--------------------------------------------------------------------- |
+| Mar 28, 2024 | 0.20.70 | <Icon icon="handshake-slash" size={12} /> | `cid` and `category` in response object for `/product_search` replaced |
+
+## <Icon icon="calendar" size={24} /> Upcoming Deprecations
+
+|     Date     |                   S                    | Description                                                                     |
+| :----------: | :------------------------------------: | :------------------------------------------------------------------------------ |
+| Dec 15, 2024 | <Icon icon="square-minus" size={12} /> | `cid` and `category` will be removed from the `/product_search` response object |
+
+## <Icon icon="circle-info" size={24} /> Deprecation details
+
+Details on API deprecations
+
+<AccordionGroup>
+  <Accordion
+    title="`cid` and `category` in response object for `/product_search` replaced"
+    icon="handshake-slash"
+    defaultOpen="false"
+    >
+    |    Item | Description          |
+    | ------: | :------------------- |
+    |    Date | Mar 28, 2024         |
+    | Version | 0.20.70              |
+    |  Status | Unsupported          |
+    |  Effect | Backwards compatible |
+    |  Impact | `/product_search`    |
+
+    The `cid` has been deprecated and will be removed in a future update. Please use the `client_category_id` instead.
+    `category` has been deprecated and will be removed in a future update. However, the `client_category` will return the same information.
+
+    Example response:
+    ```json
+    {
+      "results": [
+        {
+          "child_products": [],
+          "pid": 1122795690,
+    -     "cid": 132,
+    -     "category": Laptops,
+    +     "client_category": Laptops,
+    +     "client_category_id": 2000
+          "product_name": "Asus Zenfone 9 8GB 5G 128GB White",
+          "Product_picture_url": "https://img.valuechecker.net/,..j",
+          "specs": [
+            {
+              "spec_id": 999,
+              "spec_name_display": "Marke",
+              "spec_value_display": "Asus",
+    ```
+
+  </Accordion>
+
+</AccordionGroup>

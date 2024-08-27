@@ -3,7 +3,7 @@ title: Create Appraisal
 sidebarTitle: Step 4. Appraisals
 ---
 
-import { EndpointButton } from '/snippets/endpoint-button.mdx';
+import { EndpointButton } from "/snippets/endpoint-button.mdx";
 
 Creating an Appraisal record requires a Reference (or ‘cart’) id. A
 Reference (or cart) can contain 1 or more Appraisals.\
@@ -13,14 +13,17 @@ You should have a `client_reference_id` from
 to use in the request path.
 
 <Note>
-If an identical Appraisal record exists in the same `client_reference`
-(the same CPID and RPID), we will create a new appraisal record with a
-different identifier (`appraisal_id`).
+  If an identical Appraisal record exists in the same `client_reference` (the same `cpid` and `rpid`), we
+  will create a new appraisal record with a different identifier (`appraisal_id`).
 </Note>
 
-<EndpointButton title="Create Appraisal Endpoint" href="/api-reference/default/client_reference-appraisal-1" />
+<EndpointButton
+  title="Create Appraisal Endpoint"
+  href="/api-reference/default/client_reference-appraisal-1"
+/>
 
 # View All Appraisals
+
 To view all/any Appraisals within a reference, call the same endpoint
 without any parameters.\
 You should have a `client_reference_id` from
@@ -28,40 +31,53 @@ You should have a `client_reference_id` from
 (or [Step1.1](/api-reference/create-client-reference#list-all-references))
 to use in the request path.
 
-<Note>
-Depending how the appraisal was created, the response may contain
-additional values.
-</Note>
+<Note>Depending how the appraisal was created, the response may contain additional values.</Note>
 
-<EndpointButton title="All Appraisals In Specific Client Reference Endpoint" href="/api-reference/default/client_reference-appraisal" /> 
-
+<EndpointButton
+  title="All Appraisals In Specific Client Reference Endpoint"
+  href="/api-reference/default/client_reference-appraisal"
+/>
 
 # Delete All Appraisals
+
 To remove all Appraisals from a reference, call the same endpoint
 without any parameters.
 
 <Note>
-This empties the Reference of all Appraisals but does not delete the
-actual Reference itself.
+  This empties the Reference of all Appraisals but does not delete the actual Reference itself.
 </Note>
 
-<EndpointButton title="Delete All Appraisals In Specific Client Reference Endpoint" href="/api-reference/default/client_reference-appraisal-2" />
-
+<EndpointButton
+  title="Delete All Appraisals In Specific Client Reference Endpoint"
+  href="/api-reference/default/client_reference-appraisal-2"
+/>
 
 # View An Appraisal
+
 The `appraisal_id` (returned from [Create Appraisal](/api-reference/appraisals))
 is required in addition to the `client_reference_id`.
 
-<EndpointButton title="Get Specific Appraisal" href="/api-reference/default/client_reference-appraisal-3" />
+<EndpointButton
+  title="Get Specific Appraisal"
+  href="/api-reference/default/client_reference-appraisal-3"
+/>
 
 # Modify An Appraisal
+
 Modifications are passed as parameters in the payload (formatted in
 JSON).
 
-<EndpointButton title="Modify Specific Appraisal" href="/api-reference/default/client_reference-appraisal-4" />
+<EndpointButton
+  title="Modify Specific Appraisal"
+  href="/api-reference/default/client_reference-appraisal-4"
+/>
 
 # Delete An Appraisal
+
 To remove a specific Appraisal from a reference, pass the `appraisal_id`
 in the path.
 
-<EndpointButton title="Delete Specific Appraisal" href="/api-reference/default/client_reference-appraisal-5" />
+<EndpointButton
+  title="Delete Specific Appraisal"
+  href="/api-reference/default/client_reference-appraisal-5"
+/>

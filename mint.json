@@ -26,7 +26,7 @@
   ],
   "topbarCtaButton": {
     "name": "OAS",
-    "url": "https://storage.googleapis.com/vc2-public-files/api-docs/openapi.json"
+    "url": "https://files.valuechecker.net/api-docs/openapi.json"
   },
   "tabs": [
     {
@@ -37,9 +37,7 @@
   "navigation": [
     {
       "group": "Welcome",
-      "pages": [
-        "introduction"
-      ]
+      "pages": ["introduction"]
     },
     {
       "group": "Before Getting Started",
@@ -54,6 +52,7 @@
       "pages": [
         "roadmap/announcements",
         "roadmap/upcoming-features",
+        "roadmap/changelog",
         "roadmap/deprecation"
       ]
     },

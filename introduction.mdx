@@ -7,6 +7,7 @@ Value"
 ---
 
 ## Product details
+
 <iframe
   width="560"
   height="315"
@@ -17,6 +18,7 @@ Value"
 ></iframe>
 
 ### Service Concept
+
 ValueChecker is the global standard for product appraisals. This
 includes product identification and best Like-Kind-and-Quality
 replacement suggestions. Using artificial intelligence, advanced
@@ -29,6 +31,7 @@ ValueChecker API will also handle generic products (like shoes, pants,
 shirts etc..) and find relevant and fair market prices.
 
 ### Users and Policyholders
+
 Users are normally the Claim Handlers and Adjusters who interact with
 the ValueChecker API. Traditionally, they are doing so on behalf of a
 third party (such as an Insurer or a Claim Handling company).
@@ -38,6 +41,7 @@ solution (such as First Notice of Loss), the Policyholders are the
 `users`.
 
 ### Sequential Task Flow
+
 The ValueChecker API is a wrapper on top of a robust system of data
 aggregation, analysis, comparison and matching technology. To use this
 system in its most powerful form and realise the maximum benefits (cost
@@ -48,42 +52,33 @@ further value to the flow.
 <Steps>
   <Step title="Claimed Product: (CP)">
     <Frame>
-      <img src="assets/Claimed Product api.png" width="3000"/>
-      To calculate and deliver the best Like-Kind-and-Quality replacement
-      suggestions, ValueChecker needs to know what is being claimed (lost or
-      damaged items). The higher the level of accuracy in describing or
-      selecting the CP, the greater the precision in the replacement
-      suggestions. In most cases, every action on a product should begin
-      with a query to the Product Search endpoint.
+      <img src="assets/Claimed Product api.png" width="3000" />
+      To calculate and deliver the best Like-Kind-and-Quality replacement suggestions, ValueChecker needs
+      to know what is being claimed (lost or damaged items). The higher the level of accuracy in
+      describing or selecting the CP, the greater the precision in the replacement suggestions. In most
+      cases, every action on a product should begin with a query to the Product Search endpoint.
     </Frame>
   </Step>
-
   <Step title="Replacement Product: RP">
     <Frame>
-      <img src="assets/Replacement Product api.png" width="3000"/>
-      At the heart of the ValueChecker service is our Replacement Product
-      technology. It calculates not only what would be suitable
-      Like-Kind-and-Quality replacement products for the claimed product
-      (using our internal product identifier, the PID) but also where it is
-      available and at what price in the country of claim. The Replacement
-      Product endpoint requires a PID.
+      <img src="assets/Replacement Product api.png" width="3000" />
+      At the heart of the ValueChecker service is our Replacement Product technology. It calculates not
+      only what would be suitable Like-Kind-and-Quality replacement products for the claimed product
+      (using our internal product identifier, the `pid`) but also where it is available and at what price
+      in the country of claim. The Replacement Product endpoint requires a `pid`.
     </Frame>
   </Step>
-
   <Step title="Appraisal Management">
     <Frame>
-      <img src="assets/Management api.png" width="3000"/>
-      An Appraisal is a key data structure. It contains a pair of products
-      (CP, RP) and any calculations made on them. Calculations can involve
-      metadata like purchase/claim date (for depreciation) or product
-      category/cost. Appraisals can be grouped in carts with user-defined
-      references. Downloadable reports can be generated for single
-      appraisals or groups.
+      <img src="assets/Management api.png" width="3000" />
+      An Appraisal is a key data structure. It contains a pair of products (CP, RP) and any calculations
+      made on them. Calculations can involve metadata like purchase/claim date (for depreciation) or
+      product category/cost. Appraisals can be grouped in carts with user-defined references.
+      Downloadable reports can be generated for single appraisals or groups.
     </Frame>
   </Step>
 </Steps>
 
 <Card icon="envelope" href="https://www.valuechecker.net/contact/">
-  Team ValueChecker is available for support and we welcome you to
-  contact us at any time.
+  Team ValueChecker is available for support and we welcome you to contact us at any time.
 </Card>
