@@ -30,7 +30,8 @@
             "apiKey": {
                 "type": "apiKey",
                 "in": "header",
-                "name": "Authorization"
+                "name": "Authorization",
+                "description": "Note! Prefix your <api-key> with `apiKey `. Note the space after \"apiKey \"."
             }
         },
         "parameters": {

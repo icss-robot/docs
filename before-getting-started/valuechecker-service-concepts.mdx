@@ -3,6 +3,7 @@ title: ValueChecker Service Concepts
 ---
 
 ## Claimed Product: CP
+
 To deliver the bestLike-Kind-and-Quality replacement suggestions,
 ValueChecker needs to know what is being claimed (lost, broken or
 replaced for other reasons). The higher the level of accuracy in
@@ -11,33 +12,38 @@ replacement suggestions. For the vast majority, every user action for an
 individual product should always begin with a query to the [Product
 Search endpoint](/api-reference/default/product_search).
 
-
 ### Core Categories
+
 ValueChecker has a curated catalog for many products in the categories
 of the most claimed products where we aggregate product attributes and
 apply Product Naming logic. These categories are referred to as Core
 Categories. They can include, and are not limited to (depending on the
 market country):
-* Phones
-* Tables
-* Laptops
-* TVs
-* Cameras
-* Earphones & Headphones*
-* Smart watches* 
-* Dishwashers
-* Washing machines
-* Hobs
-* Bikes
-* GoPro's & Video Cameras
 
-*Only popular brands
+- Phones
+- Tables
+- Laptops
+- TVs
+- Cameras
+- Earphones & Headphones\*
+- Smart watches\*
+- Dishwashers
+- Washing machines
+- Hobs
+- Bikes
+- GoPro's & Video Cameras
 
-ValueChecker is capable of finding almost any standard product in a
-majority of categories. The only difference is the higher accuracy and
-correctness of the product information in the Core Categories. 
+\*Only popular brands
+
+### Non-core Categories
+
+Categories for everything else. ValueChecker is capable of finding almost
+any standard product in a majority of categories. The only difference is the
+higher accuracy and correctness of the product information in the [Core
+Categories](/before-getting-started/valuechecker-service-concepts#core-categories).
 
 ### Master Product
+
 Master Products is a normalized group of products that are extremely
 similar to each other. This usually accounts for product color
 variations or other trivial deviations that make no difference to the
@@ -52,21 +58,24 @@ grouped_prices list for the lowest available price from a recommended
 shop).
 
 ## Replacement Product: RP
+
 At the heart of the ValueChecker service is our Replacement Product
 technology. It calculates not only what would be suitable
 Like-Kind-and-Quality replacement products for the claimed product
-(using our internal product identifier, the `PID`) but also where it is
+(using our internal product identifier, the `pid`) but also where it is
 available for sale and at what price in the country of claim. The
 [Replacement Product endpoint](/api-reference/default/prices) requires a
-`PID` to perform these calculations.
+`pid` to perform these calculations.
 
 ## Appraisals
+
 An Appraisal is a dataset of a CP, an RP and any calculations performed
-on this pair of products. Calculations can be made on: 
-* metadata attached to the Appraisal (such as date of purchase and/or
-date of claim to calculate depreciation)
-* metadata derived from the product (such as the category of CP, cost
-value of the RP), or a number of manual metadata manipulations.
+on this pair of products. Calculations can be made on:
+
+- metadata attached to the Appraisal (such as date of purchase and/or
+  date of claim to calculate depreciation)
+- metadata derived from the product (such as the category of CP, cost
+  value of the RP), or a number of manual metadata manipulations.
 
 Appraisals can be grouped together in a cart with a specific Reference
 that can be defined by your implementation (and/or the user). Appraisals

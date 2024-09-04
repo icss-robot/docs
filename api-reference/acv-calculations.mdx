@@ -1,27 +1,59 @@
 ---
-title: ACV Calculations
-sidebarTitle: Step 5. ACV Calculations
+title: RCV and ACV Calculations
+sidebarTitle: Step 5. RCV and ACV Calculations
 ---
 
-import { EndpointButton } from '/snippets/endpoint-button.mdx';
+import { EndpointButton } from "/snippets/endpoint-button.mdx";
 
 <Warning>
-The endpoint **/client_reference** has restricted availability. Any
-calls to it will result in a 404 response. You can request access from
-your ValueChecker representative.
+  The endpoint /client_reference has an availability setting. Any calls to it
+  without the setting enabled will result in a 404 response. You can request
+  access from your ValueChecker representative.
 </Warning>
 
-ValueChecker is able to calculate payouts (before standard deductions
-apply) by using the depreciation values provided by the insurance
-company. This is accomplished by providing user-input parameters like
-the date of damage and the date of purchase in the request -- along with
-other, previously obtained parameters detailed below.
-
+ValueChecker is able to calculate payouts (before standard deductions apply)
+by using the depreciation values provided by the insurance company. This
+is accomplished by providing user-input parameters like the date of damage
+and the date of purchase in the request -- along with other, previously
+obtained parameters detailed below.
 
 # Perform an ACV Calculation
 
-<EndpointButton title="Perform ACV Calculation Endpoint" href="/api-reference/default/client_reference-appraisal-acv" />
+<EndpointButton
+  title="Perform ACV Calculation Endpoint"
+  href="/api-reference/default/client_reference-appraisal-acv"
+/>
 
 # Reset an ACV Calculation
 
-<EndpointButton title="Delete ACV Calculation Endpoint" href="/api-reference/default/client_reference-appraisal-acv-1" />
+When performing this action, the ACV value will be reset to the current value of the RCV.
+
+<EndpointButton
+  title="ACV Reset Calculation Endpoint"
+  href="/api-reference/default/client_reference-appraisal-acv-1"
+/>
+
+# Retrieve RCV and/or ACV Values
+
+The RCV and ACV values are stored (if available) in each appraisal object and can be retrieved
+by either the full client reference or an individual appraisal.
+
+Appraisals that have been added by the ValueChecker Customer Portal or by a Sheet Import are
+automatically processed and will have both the RCV and ACV calculated values available.
+
+Appraisals that your implementation adds will need to be calculated manually by using the step
+outlined in [Step 5.1. Perform an ACV Calculation](/api-reference/acv-calculations#perform-an-acv-calculation).
+
+Example for retrieving RCV and ACV values from a client_reference:
+
+<EndpointButton
+  title="Retrieve ACV & RCV from Client Reference Endpoint"
+  href="/api-reference/default/client_reference-appraisal"
+/>
+
+Example for retrieving RCV and ACV values from an appraisal:
+
+<EndpointButton
+  title="Retrieve ACV & RCV from Appraisal Endpoint"
+  href="/api-reference/default/client_reference-appraisal-3"
+/>

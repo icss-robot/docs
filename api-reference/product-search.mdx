@@ -3,18 +3,20 @@ title: Product Search (CP)
 sidebarTitle: Step 2. Product Search (CP)
 ---
 
-import { EndpointButton } from '/snippets/endpoint-button.mdx';
+import { EndpointButton } from "/snippets/endpoint-button.mdx";
 
 Search for products in our catalogs using a query string.
 
 ## Category Prediction
+
 The ValueChecker API is capable of predicting the correct category based
 on analysis of the search query string. Keep in mind this is highly
 dependent on the richness of the query string.
 
 #### Examples of rich search queries:
-* `2008 lg washing machine front loader`
-* `Wifi/4G Galaxy Watch Sport T-Buckle graphite`
+
+- `2008 lg washing machine front loader`
+- `Wifi/4G Galaxy Watch Sport T-Buckle graphite`
 
 Though it is not required, we recommend you use a category identifier
 (`client_category_id`) or a category name (`client_category`) where
@@ -23,6 +25,7 @@ select or define a category).\
 [Read more about Client Categories](/before-getting-started/valuechecker-api-essentials#client-categories)
 
 ## Category Correction
+
 When a search is made to a requested category that the ValueChecker
 predicts with high certainty is the wrong category, a client feature
 (enabled by ValueChecker) automatically performs the search and returns
@@ -36,6 +39,7 @@ override parameter of `force_client_category` = `true` for specific
 search requests that will prevent any category analysis or switching.
 
 # Search Suggestions
+
 For implementations that require fast or continuously updating results
 for a query search (examples: "search as you type", instant display of
 related series/models, drop-down or tree population based on options
@@ -52,7 +56,7 @@ network allows which your implementation can then update/render to the
 user.\
 This endpoint returns a case insensitive, strictly matched result.
 Misspellings and mistakes are not considered nor automatically
-corrected. 
+corrected.
 
 Every request searches for results except when the search query matches
 a brand name, or the beginning of a brand name. In this case, due to the
@@ -76,53 +80,53 @@ There is support for the user to also be allowed to define their own
 category which you pass to the API with the `client_category` parameter.
 
 <Warning>
-Important: This feature is only available for our catalog categories
-where we have pre-calculated replacement data. You can find this flag
-from the results of the [client_categories](/before-getting-started/valuechecker-api-essentials#client-categories)
-endpoint where the category has a field and value of
-`"has_replacement": true`
+  Important: This feature is only available for our catalog categories where we have pre-calculated
+  replacement data. You can find this flag from the results of the
+  [client_categories](/before-getting-started/valuechecker-api-essentials#client-categories) endpoint
+  where the category has a field and value of `"has_replacement": true`
 </Warning>
 
 ```json example category
 {
-    "client_category_id": 11499,
-    "client_category": "Smartwatches",
-    "parent_client_category_id": 2427,
-    "cid": 431051,
-    "has_depreciation": true,
-    "has_replacement": true,
-    "acv_disabled": false,
-    "show_closest_matches": false
+  "client_category_id": 11499,
+  "client_category": "Smartwatches",
+  "parent_client_category_id": 2427,
+  "cid": 431051,
+  "has_depreciation": true,
+  "has_replacement": true,
+  "acv_disabled": false,
+  "show_closest_matches": false
 }
 ```
 
 <Note>
-**Results:** The result set may not be identical to the
-[extended search](/api-reference/product-search#extended-search)
-results as we only query our [Master products](/before-getting-started/valuechecker-service-concepts#master-product)
-for this endpoint. We recommend you add functionality to allow a user to
-perform an extended search if they are not satisfied with these results
-or when we do not have any Master products matching their search query
-(empty resultset).
+  **Results:** The result set may not be identical to the [extended
+  search](/api-reference/product-search#extended-search) results as we only query our [Master
+  products](/before-getting-started/valuechecker-service-concepts#master-product) for this endpoint. We
+  recommend you add functionality to allow a user to perform an extended search if they are not satisfied
+  with these results or when we do not have any Master products matching their search query (empty
+  resultset).
 </Note>
 
 <Note>
-**Language:** The specification name (`spec_name`) values are currently
-only returned in lowercase English (please cast to the preferred format
-of your locale i.e. "Title Case" or "Camel Case" etc..).\
-Serving translations for the default locale of the requesting client
-(token) is under development and will be available in an upcoming
-non-breaking release. 
+  **Language:** The specification name (`spec_name`) values are currently only returned in lowercase
+  English (please cast to the preferred format of your locale i.e. "Title Case" or "Camel Case" etc..).\
+  Serving translations for the default locale of the requesting client (token) is under development and
+  will be available in an upcoming non-breaking release.
 </Note>
 
-<EndpointButton title="CP: Fast Product Search Endpoint" href="/api-reference/default/search_suggestion" />
+<EndpointButton
+  title="CP: Fast Product Search Endpoint"
+  href="/api-reference/default/search_suggestion"
+/>
 
 # Extended Search
+
 A product category identifier `client_category_id` or a category name
 `client_category` from [client_categories](/api-reference/query-parameter-requests#get-client-information)
 should be selected by the user (we recommend a drop-down/list/other
 similar UI component be used for selection purposes) to be used in the
-call for the claimed product being searched for. 
+call for the claimed product being searched for.
 
 This action performs a sequence of tasks (such as auto-correction for
 spelling typos, matching for [Master](/before-getting-started/valuechecker-service-concepts#master-product)
@@ -142,7 +146,7 @@ updating implementation (such as "search as you type" etc..).
     {
       "child_products": [],
       "pid": 1122795690,
-      "cid": 132,      
+      "cid": 132,
       "category": "Laptops",
       "client_category": "Laptops",
       "client_category_id": 2000,
@@ -162,8 +166,8 @@ updating implementation (such as "search as you type" etc..).
         "price_url": "https://www.belsimpel.nl/asus-zen…",
         "shop_count": 1,
         "price_date": "2022-12-06 15:58:52"
-      },
-    },
+      }
+    }
   ],
   "metadata": {
     "category": {
@@ -174,17 +178,17 @@ updating implementation (such as "search as you type" etc..).
       "predicted_client_category": "Mobiele Telefoon",
       "category_switched": true
     },
-  "used_query": "asus zenfone 2015"
+    "used_query": "asus zenfone 2015"
   }
 }
 ```
 
 ### Deprecation warnings
-* `cid` has been deprecated and will be removed in a future update.
-Please use the `client_category_id` directly instead.
-* `category` has been deprecated and will be removed in a future update.
-However, the `client_category` will return the same information.
 
+- `cid` has been deprecated and will be removed in a future update.
+  Please use the `client_category_id` directly instead.
+- `category` has been deprecated and will be removed in a future update.
+  However, the `client_category` will return the same information.
 
 If at least 1 `pid` is returned, use a `pid` to continue to
 [Replacement Suggestions and Prices](/api-reference/replacement-product-suggestions).
@@ -197,6 +201,7 @@ that this search should be performed in the category of Mobile phones
 automatic switch of categories for the search and response.
 
 ### Reference Price
+
 The Price returned here is a reference price. In many cases it is a
 near-live or recent price that ValueChecker has obtained from multiple
 internet sources (shops, search engines etc..). This price is not to be
@@ -204,6 +209,7 @@ confused with the Replacement prices from the [Replacement Suggestions
 and Prices](/api-reference/replacement-product-suggestions).
 
 ### Child Products
+
 When ValueChecker finds products that are equivalent in technical
 specifications to a [Master Product]()
 in our catalog but with minor variance in attributes (for example
@@ -213,10 +219,7 @@ product(s) are identical to the Master Product with the only difference
 being in the product name. There is no difference in the replacement
 calculation.
 
-<Info>
-By default, the response contains an empty `child_products` key (value:
-empty list).
-</Info>
+<Info>By default, the response contains an empty `child_products` key (value: empty list).</Info>
 
 ```json example response "iPhone 10 grey"
 {
@@ -233,7 +236,8 @@ empty list).
 ```
 
 ## Aggregated Prices (a.k.a. Clustered Prices)
-For searches in non-[core categories](/before-getting-started/valuechecker-service-concepts#core-categories),
+
+For searches in [non-core categories](/before-getting-started/valuechecker-service-concepts#core-categories),
 the ValueChecker will search many popular shopping APIs (Google shopping
 for example) and collect all prices that match the search query. After
 clustering the prices into 3 buckets of low, medium and high, the data
@@ -241,17 +245,17 @@ is available in the response for cases where you want to show average
 prices to the application users.
 
 An example response for a search for "Levis bluejeans":
-<Note>
-note that no category information is requested.
-</Note>
+
+<Note>note that no category information is requested.</Note>
 
 > \{api_url_path\}/product_search?query=Levis bluejeans
+
 ```json Response (excerpt)
 {
   "results": [
     {
       "pid": 1739972236,
-      "cid": 135,      
+      "cid": 135,
       "category": "Clothes",
       "client_category": "Clothes",
       "client_category_id": 3000,
@@ -286,13 +290,17 @@ note that no category information is requested.
 ```
 
 The first item in the “results” object will have the keys"
-* `price_clusters`: the object with the price cluster information.
-* `udc_id`: This is the identifier of the product with the attached
-cluster weight: low, medium or high. There are 3 different udc_ids per
-product that can be used to [create an appraisal](/api-reference/appraisals). 
-* `price`: The median price of the cluster. Use this value as the
-cluster price. 
-* `percentage`: Ratio of the number of prices in the cluster compared to
-all prices found for the search. 
 
-<EndpointButton title="CP: Extended Product Search (core) Endpoint" href="/api-reference/default/product_search" />
+- `price_clusters`: the object with the price cluster information.
+- `udc_id`: This is the identifier of the product with the attached
+  cluster weight: low, medium or high. There are 3 different udc_ids per
+  product that can be used to [create an appraisal](/api-reference/appraisals).
+- `price`: The median price of the cluster. Use this value as the
+  cluster price.
+- `percentage`: Ratio of the number of prices in the cluster compared to
+  all prices found for the search.
+
+<EndpointButton
+  title="CP: Extended Product Search (core) Endpoint"
+  href="/api-reference/default/product_search"
+/>
