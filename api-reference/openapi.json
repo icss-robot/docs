@@ -1791,11 +1791,9 @@
                                         },
                                         "grouped_prices": {
                                             "type": "array",
+                                            "description": "!! Group consists of an array of arrays containing price objects. Check the example for more details.",
                                             "items": {
-                                                "type": "array",
-                                                "items": {
-                                                    "$ref": "#/components/schemas/PriceListElement"
-                                                }
+                                                "$ref": "#/components/schemas/PriceListElement"
                                             }
                                         }
                                     }
