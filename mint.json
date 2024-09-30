@@ -22,6 +22,10 @@
     {
       "name": "Contact",
       "url": "https://www.valuechecker.net/contact/"
+    },
+    {
+      "name": "Version: 0.24.83",
+      "url": "_blank"
     }
   ],
   "topbarCtaButton": {
