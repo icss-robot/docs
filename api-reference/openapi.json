@@ -307,6 +307,9 @@
                     "product_name": {
                         "type": "string"
                     },
+                    "vcid": {
+                        "type": "integer"
+                    },
                     "cid": {
                         "type": "integer"
                     },
@@ -330,6 +333,12 @@
                     },
                     "query_at_limit": {
                         "type": "boolean"
+                    },
+                    "client_category_id": {
+                        "type": "integer"
+                    },
+                    "client_category": {
+                        "type": "string"
                     }
                 }
             },
@@ -340,6 +349,9 @@
                         "type": "integer"
                     },
                     "sid": {
+                        "type": "integer"
+                    },
+                    "vcid": {
                         "type": "integer"
                     },
                     "source_internal_id": {
@@ -1793,6 +1805,7 @@
                                         "pid": 1262828314,
                                         "master_name": "",
                                         "product_name": "Apple iPhone 14 Pro Max 1TB",
+                                        "vcid": 1417514,
                                         "cid": 4364,
                                         "pic_url": "https://img.valuechecker.net/,---.jpg",
                                         "product_pic_url": "https://img.valuechecker.net/200x,---.jpg",
@@ -1835,7 +1848,9 @@
                                             }
                                         ],
                                         "in_stock": true,
-                                        "query_at_limit": false
+                                        "query_at_limit": false,
+                                        "client_category_id": 4364,
+                                        "client_category": "Mobile Phones"
                                     },
                                     "grouped_prices": [
                                         [
@@ -1846,7 +1861,7 @@
                                                 "base_price": 1684.99,
                                                 "price_date": "2023-07-25 11:07:41",
                                                 "offer_id": 228246862,
-                                                "offer_url": "https://offer-staging.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                                "offer_url": "https://offer.valuechecker.net/abc---123",
                                                 "international": false,
                                                 "is_refurbished": false,
                                                 "in_stock": true,
@@ -1855,6 +1870,7 @@
                                                 "product": {
                                                     "pid": 1263096838,
                                                     "sid": 44001,
+                                                    "vcid": 1417514,
                                                     "source_internal_id": "3202448228",
                                                     "master_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
                                                     "product_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
@@ -1919,7 +1935,7 @@
                                                 "base_price": 1684.99,
                                                 "price_date": "2023-07-25 11:07:41",
                                                 "offer_id": 228246863,
-                                                "offer_url": "https://offer-staging.valuechecker.net/dAkKadvB66xaQJoaQF5BrG",
+                                                "offer_url": "https://offer.valuechecker.net/abc---123",
                                                 "international": false,
                                                 "is_refurbished": false,
                                                 "in_stock": true,
@@ -1928,6 +1944,7 @@
                                                 "product": {
                                                     "pid": 1263096838,
                                                     "sid": 44001,
+                                                    "vcid": 1417514,
                                                     "source_internal_id": "3202448228",
                                                     "master_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
                                                     "product_name": "Apple iPhone 14 Pro Max 1024GB (2022)",
