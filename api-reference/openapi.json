@@ -3,7 +3,7 @@
     "info": {
         "title": "ValueChecker API",
         "description": "The ValueChecker Application Programming Interface.",
-        "version": "0.20.70",
+        "version": "0.47.2",
         "x-logo": {
             "url": "https://files.valuechecker.net/images/default-category-images/Value-Checker_top_bar_logo.png",
             "backgroundColor": "#FFFFFF",
