@@ -57,10 +57,15 @@
                 },
                 "example": "10"
             },
+            "client_reference_id": {
+                "name": "client_reference_id",
+                "in": "path",
                 "schema": {
-                    "type": "integer"
+                    "type": "string"
                 },
-                "example": 10
+                "required": true,
+                "description": "The client reference identifier.",
+                "example": "9337"
             }
         },
         "responses": {
@@ -1038,12 +1043,7 @@
                 "summary": "Get Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2153,12 +2153,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -2309,12 +2304,7 @@
                 "summary": "All Apprisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2478,12 +2468,7 @@
                 "summary": "Delete All Appraisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2585,12 +2570,7 @@
                 "summary": "Get Specific Appraisal",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "name": "appraisal_id",
@@ -2791,12 +2771,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "name": "appraisal_id",
@@ -2910,12 +2885,7 @@
                 "summary": "Delete Specific Appraisal",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "name": "appraisal_id",
@@ -3086,12 +3056,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "name": "appraisal_id",
@@ -3246,12 +3211,7 @@
                 "summary": "Delete ACV Calculation",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "name": "appraisal_id",
@@ -3382,12 +3342,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3516,12 +3471,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "name": "appraisal_id",
