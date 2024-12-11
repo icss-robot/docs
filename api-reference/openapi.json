@@ -1210,7 +1210,7 @@
                         "name": "client_category_id",
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "{{client_category_id}}",
                         "description": "Optional correlating ID of the category selected by the **user**."
@@ -1449,7 +1449,7 @@
                         "name": "client_category_id",
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "{{client_category_id}}",
                         "description": "Optional correlating ID of the category selected by the **user**."
@@ -1729,7 +1729,7 @@
                         "required": true,
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "1262828314",
                         "description": "The product identifier (usually selected from the product search response)."
@@ -1755,7 +1755,7 @@
                         "name": "client_category_id",
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "{{client_category_id}}"
                     },
