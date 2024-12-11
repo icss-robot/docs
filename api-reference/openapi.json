@@ -66,6 +66,16 @@
                 "required": true,
                 "description": "The client reference identifier.",
                 "example": "9337"
+            },
+            "appraisal_id": {
+                "name": "appraisal_id",
+                "in": "path",
+                "schema": {
+                    "type": "string"
+                },
+                "required": true,
+                "description": "The appraisal identifier.",
+                "example": "97771"
             }
         },
         "responses": {
@@ -2573,12 +2583,7 @@
                         "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2774,12 +2779,7 @@
                         "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2888,12 +2888,7 @@
                         "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3059,12 +3054,7 @@
                         "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3214,12 +3204,7 @@
                         "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3474,12 +3459,7 @@
                         "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
