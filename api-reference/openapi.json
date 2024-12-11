@@ -1004,25 +1004,28 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "client_reference_id": {
-                                            "type": "integer"
-                                        },
-                                        "client_reference": {
-                                            "type": "string"
-                                        },
-                                        "create_time": {
-                                            "type": "string"
-                                        },
-                                        "update_time": {
-                                            "type": "string"
-                                        },
-                                        "user_id": {
-                                            "type": "integer"
-                                        },
-                                        "client_id": {
-                                            "type": "integer"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "client_reference_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_reference": {
+                                                "type": "string"
+                                            },
+                                            "create_time": {
+                                                "type": "string"
+                                            },
+                                            "update_time": {
+                                                "type": "string"
+                                            },
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_id": {
+                                                "type": "integer"
+                                            }
                                         }
                                     }
                                 },
