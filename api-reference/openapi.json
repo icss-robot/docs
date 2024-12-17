@@ -3,7 +3,7 @@
     "info": {
         "title": "ValueChecker API",
         "description": "The ValueChecker Application Programming Interface.",
-        "version": "0.20.70",
+        "version": "0.47.2",
         "x-logo": {
             "url": "https://files.valuechecker.net/images/default-category-images/Value-Checker_top_bar_logo.png",
             "backgroundColor": "#FFFFFF",
@@ -15,6 +15,11 @@
             "email": "support@valuechecker.net"
         }
     },
+    "tags": [
+        {
+            "name": "default"
+        }
+    ],
     "externalDocs": {
         "description": "PDF Documentation (official)",
         "url": "https://www.valuechecker.net/docs/api/pdf"
@@ -48,9 +53,29 @@
                 "name": "client_id",
                 "in": "query",
                 "schema": {
-                    "type": "integer"
+                    "type": "string"
                 },
-                "example": 10
+                "example": "10"
+            },
+            "client_reference_id": {
+                "name": "client_reference_id",
+                "in": "path",
+                "schema": {
+                    "type": "string"
+                },
+                "required": true,
+                "description": "The client reference identifier.",
+                "example": "9337"
+            },
+            "appraisal_id": {
+                "name": "appraisal_id",
+                "in": "path",
+                "schema": {
+                    "type": "string"
+                },
+                "required": true,
+                "description": "The appraisal identifier.",
+                "example": "97771"
             }
         },
         "responses": {
@@ -979,25 +1004,28 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "client_reference_id": {
-                                            "type": "integer"
-                                        },
-                                        "client_reference": {
-                                            "type": "string"
-                                        },
-                                        "create_time": {
-                                            "type": "string"
-                                        },
-                                        "update_time": {
-                                            "type": "string"
-                                        },
-                                        "user_id": {
-                                            "type": "integer"
-                                        },
-                                        "client_id": {
-                                            "type": "integer"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "client_reference_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_reference": {
+                                                "type": "string"
+                                            },
+                                            "create_time": {
+                                                "type": "string"
+                                            },
+                                            "update_time": {
+                                                "type": "string"
+                                            },
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "client_id": {
+                                                "type": "integer"
+                                            }
                                         }
                                     }
                                 },
@@ -1028,12 +1056,7 @@
                 "summary": "Get Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -1190,7 +1213,7 @@
                         "name": "client_category_id",
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "{{client_category_id}}",
                         "description": "Optional correlating ID of the category selected by the **user**."
@@ -1429,7 +1452,7 @@
                         "name": "client_category_id",
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "{{client_category_id}}",
                         "description": "Optional correlating ID of the category selected by the **user**."
@@ -1709,7 +1732,7 @@
                         "required": true,
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "1262828314",
                         "description": "The product identifier (usually selected from the product search response)."
@@ -1735,7 +1758,7 @@
                         "name": "client_category_id",
                         "in": "query",
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "example": "{{client_category_id}}"
                     },
@@ -2143,12 +2166,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
@@ -2299,12 +2317,7 @@
                 "summary": "All Apprisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2468,12 +2481,7 @@
                 "summary": "Delete All Appraisals In Specific Client Reference",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2575,20 +2583,10 @@
                 "summary": "Get Specific Appraisal",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2781,20 +2779,10 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -2900,20 +2888,10 @@
                 "summary": "Delete Specific Appraisal",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3076,20 +3054,10 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3236,20 +3204,10 @@
                 "summary": "Delete ACV Calculation",
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3372,12 +3330,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
@@ -3506,20 +3459,10 @@
                 },
                 "parameters": [
                     {
-                        "name": "client_reference_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/client_reference_id"
                     },
                     {
-                        "name": "appraisal_id",
-                        "in": "path",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "required": true
+                        "$ref": "#/components/parameters/appraisal_id"
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
