@@ -1,0 +1,62 @@
+---
+title: Customer Portal Links
+sidebarTitle: Customer Portal Links
+---
+
+import { EndpointButton } from '/snippets/endpoint-button.mdx';
+
+Easily create and manage portal links using the **Customer Portal Links**.
+
+Manage access to the ValueChecker Portal via the API. Create and get access 
+links, set or revoke access codes (PINs) and change status.
+
+<Tip>The ValueChecker Portal is a separate product that is not included in the 
+ValueChecker API. The details listed below are only for managing access to 
+the Portal.</Tip> 
+
+### Follow the steps below to automate access to the Portal
+
+<Steps>
+    <Step title="Create a client reference">
+        <EndpointButton title="Create Client Reference Endpoint" href="/api-reference/default/client_reference-1" />
+    </Step>
+    <Step title="Create a portal link">
+        `POST` to the endpoint with empty request body, or 
+        `access_pin` parameter to specify a PIN. 
+        The status will be `active`. If no PIN is supplied, a random 4 digit 
+        pin will be automatically generated.
+
+        <Note>Every Client Reference can only have 1 associated link. Any subsequent requests will be performed on the original record without creating a new link.</Note>
+
+        <EndpointButton title="Create Customer Portal Link Endpoint" href="/api-reference/default/customer-portal-post" />
+    </Step>
+    <Step title="Portal data is submitted to the ValueChecker API">
+        When the portal user submits their inventory, the `link_status` will 
+        have a value of `submitted`.
+
+        `GET` the endpoint to receive current `link_status` and `access_pin`.
+        <EndpointButton title="Get a Customer Portal Link Endpoint" href="/api-reference/default/customer-portal-get" />
+    </Step>
+    <Step title="Changing Portal status">
+
+        * To lock  the portal use `PATCH` with `link_status` parameter of 
+        `locked`.
+
+        * To unlock the portal use `PATCH` with `link_status` parameter of 
+        `active`.
+
+        <EndpointButton title="Manage Customer Portal Link Endpoint" href="/api-reference/default/customer-portal-patch" />
+    </Step>
+</Steps>
+
+### Reset the PIN
+`PATCH` the endpoint specifying a new 4 digit PIN using the `access_pin`.
+
+### Explaining Portal link statuses
+`PATCH` the endpoint specifying a new status with `link_status` parameter. 
+We accept 3 different statuses.
+
+**a.** `active` - default status of link after creating it with `POST`.\
+**b.** `submitted` - status after Portal user submits their inventory.\
+**c.** `locked` - if enabled, status restricts Portal user from editing their 
+inventory.
