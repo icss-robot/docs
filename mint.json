@@ -94,7 +94,10 @@
         "api-reference/default/client_reference-appraisal-acv",
         "api-reference/default/client_reference-appraisal-acv-1",
         "api-reference/default/client_reference-report",
-        "api-reference/default/client_reference-appraisal-report"
+        "api-reference/default/client_reference-appraisal-report",
+        "api-reference/default/customer-portal-post",
+        "api-reference/default/customer-portal-get",
+        "api-reference/default/customer-portal-patch"
       ]
     }
   ],
