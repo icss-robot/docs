@@ -53,7 +53,7 @@
                 "name": "client_id",
                 "in": "query",
                 "schema": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "example": "10"
             },
@@ -61,7 +61,7 @@
                 "name": "client_reference_id",
                 "in": "path",
                 "schema": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "required": true,
                 "description": "The client reference identifier.",
