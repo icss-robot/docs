@@ -3,7 +3,7 @@
     "info": {
         "title": "ValueChecker API",
         "description": "The ValueChecker Application Programming Interface.",
-        "version": "0.47.2",
+        "version": "0.59.3",
         "x-logo": {
             "url": "https://files.valuechecker.net/images/default-category-images/Value-Checker_top_bar_logo.png",
             "backgroundColor": "#FFFFFF",
@@ -53,7 +53,7 @@
                 "name": "client_id",
                 "in": "query",
                 "schema": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "example": "10"
             },
@@ -61,7 +61,7 @@
                 "name": "client_reference_id",
                 "in": "path",
                 "schema": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "required": true,
                 "description": "The client reference identifier.",
@@ -581,6 +581,31 @@
                     },
                     "row_id": {
                         "type": "integer"
+                    }
+                }
+            },
+            "CustomerPortalLink": {
+                "type": "object",
+                "properties": {
+                    "client_category_id": {
+                        "type": "integer"
+                    },
+                    "client_reference": {
+                        "type": "string"
+                    },
+                    "link": {
+                        "type": "string"
+                    },
+                    "access_pin": {
+                        "type": "string"
+                    },
+                    "link_status": {
+                        "type": "string",
+                        "enum": [
+                            "active",
+                            "submitted",
+                            "locked"
+                        ]
                     }
                 }
             }
@@ -3558,6 +3583,438 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/client_reference/{client_reference_id}/portal/customer/access": {
+            "post": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Create Customer Portal Link",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "access_pin": {
+                                        "type": "string",
+                                        "description": "Must contain 4 numbers."
+                                    }
+                                }
+                            },
+                            "example": {
+                                "access_pin": "1234"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/client_reference_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:10:05 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "66"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "93bb1e26-0d81-4d82-8ada-f40b10eabb50"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomerPortalLink"
+                                },
+                                "example": {
+                                    "client_reference_id": 9337,
+                                    "client_reference": "Reference 321",
+                                    "link": "https://inventory.valuechecker.ai/549b2a",
+                                    "access_pin": "1234",
+                                    "link_status": "active"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:10:05 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "66"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "93bb1e26-0d81-4d82-8ada-f40b10eabb50"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomerPortalLink"
+                                },
+                                "example": {
+                                    "client_reference_id": 9337,
+                                    "client_reference": "Reference 321",
+                                    "link": "https://inventory.valuechecker.ai/549b2a",
+                                    "access_pin": "1234",
+                                    "link_status": "active"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 9337 was not found",
+                                    "event_code": "ERNF00",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The client_reference_id \"9337\" was not found"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Get a Customer Portal Link",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/client_reference_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:03:35 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "85"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "945ccee0-a255-403b-9a32-863a5f2f2c6a"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomerPortalLink"
+                                },
+                                "example": {
+                                    "client_reference_id": 9337,
+                                    "client_reference": "Reference 321",
+                                    "link": "https://inventory.valuechecker.ai/549b2a",
+                                    "access_pin": "1234",
+                                    "link_status": "active"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 9337 was not found",
+                                    "event_code": "ERNF00",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The \"client_reference_id\" \"9337\" was not found"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Manage Customer Portal Link",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "access_pin": {
+                                        "type": "string",
+                                        "description": "Must contain 4 numbers."
+                                    },
+                                    "link_status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "submitted",
+                                            "locked"
+                                        ]
+                                    }
+                                }
+                            },
+                            "example": {
+                                "access_pin": "4321",
+                                "link_status": "locked"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/client_reference_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/client_id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/session-id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Tue, 25 Jul 2023 09:10:05 GMT"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "66"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "x-request-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "93bb1e26-0d81-4d82-8ada-f40b10eabb50"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CustomerPortalLink"
+                                },
+                                "example": {
+                                    "client_reference_id": 9337,
+                                    "client_reference": "Reference 321",
+                                    "link": "https://inventory.valuechecker.ai/549b2a",
+                                    "access_pin": "4321",
+                                    "link_status": "locked"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        },
+                                        "event_code": {
+                                            "type": "string"
+                                        },
+                                        "event_dict": {
+                                            "type": "object",
+                                            "properties": {
+                                                "event_severity": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "Client reference 9337 was not found",
+                                    "event_code": "ERNF00",
+                                    "event_dict": {
+                                        "event_severity": "ERROR",
+                                        "title": "Wrong \"client_reference_id\" value",
+                                        "description": "The client_reference_id \"9337\" was not found"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
                     }
                 }
             }

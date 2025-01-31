@@ -24,7 +24,7 @@
       "url": "https://www.valuechecker.net/contact/"
     },
     {
-      "name": "Version: 0.47.2",
+      "name": "Version: 0.59.3",
       "url": "_blank"
     }
   ],
@@ -71,6 +71,7 @@
         "api-reference/appraisals",
         "api-reference/acv-calculations",
         "api-reference/generate-reports",
+        "api-reference/customer-portal",
         "api-reference/appendix"
       ]
     },
@@ -94,7 +95,10 @@
         "api-reference/default/client_reference-appraisal-acv",
         "api-reference/default/client_reference-appraisal-acv-1",
         "api-reference/default/client_reference-report",
-        "api-reference/default/client_reference-appraisal-report"
+        "api-reference/default/client_reference-appraisal-report",
+        "api-reference/default/customer-portal-post",
+        "api-reference/default/customer-portal-get",
+        "api-reference/default/customer-portal-patch"
       ]
     }
   ],
