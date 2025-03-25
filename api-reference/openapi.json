@@ -2339,7 +2339,7 @@
                 "tags": [
                     "default"
                 ],
-                "summary": "All Apprsals In Specific Client Reference",
+                "summary": "All Appraisals In Specific Client Reference",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/client_reference_id"
