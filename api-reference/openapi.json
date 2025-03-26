@@ -1461,7 +1461,7 @@
                 "tags": [
                     "default"
                 ],
-                "summary": "CP: Extended Product Search (core)",
+                "summary": "CP: Extended Product Search",
                 "parameters": [
                     {
                         "name": "query",
@@ -1499,6 +1499,33 @@
                         },
                         "example": true,
                         "description": "Optional flag to force the use of the requested category."
+                    },
+                    {
+                        "name": "claimed_amount",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "example": 800.0,
+                        "description": "Optional claimed amount for the product."
+                    },
+                    {
+                        "name": "price_min",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "example": 10.0,
+                        "description": "Optional minimum price limit for the search."
+                    },
+                    {
+                        "name": "price_max",
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "example": 1000.0,
+                        "description": "Optional maximum price limit for the search."
                     },
                     {
                         "$ref": "#/components/parameters/client_id"
