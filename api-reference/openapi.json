@@ -55,7 +55,8 @@
                 "schema": {
                     "type": "integer"
                 },
-                "example": "10"
+                "example": "10",
+                "description": "The client ID for the request. It's required if you have access to multiple clients with your API key. Otherwise, it's optional."
             },
             "client_reference_id": {
                 "name": "client_reference_id",
