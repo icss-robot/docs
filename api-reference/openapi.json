@@ -77,6 +77,24 @@
                 "required": true,
                 "description": "The appraisal identifier.",
                 "example": "97771"
+            },
+            "page": {
+                "name": "page",
+                "in": "query",
+                "schema": {
+                    "type": "integer"
+                },
+                "example": "2",
+                "description": "Page number for response pagination."
+            },
+            "page_size": {
+                "name": "page_size",
+                "in": "query",
+                "schema": {
+                    "type": "integer"
+                },
+                "example": "30",
+                "description": "Page size for response pagination."
             }
         },
         "responses": {
@@ -504,6 +522,40 @@
                     }
                 }
             },
+            "AppraisalMetadata": {
+                "type": "object",
+                "properties": {
+                    "ongoing_count": {
+                        "type": "integer",
+                        "description": "Count of ongoing calculation of RCV."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "Timestamp of the response."
+                    },
+                    "appraisals": {
+                        "type": "object",
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "description": "Current response pagination page number"
+                            },
+                            "page_size": {
+                                "type": "integer",
+                                "description": "Current response pagination page size"
+                            },
+                            "total_pages": {
+                                "type": "integer",
+                                "description": "Total pages in the Client Reference"
+                            },
+                            "total_items": {
+                                "type": "integer",
+                                "description": "Total items in the Client Reference"
+                            }
+                        }
+                    }
+                }
+            },
             "Appraisal": {
                 "type": "object",
                 "properties": {
@@ -582,6 +634,9 @@
                     },
                     "row_id": {
                         "type": "integer"
+                    },
+                    "metadata": {
+                        "$ref": "#/components/schemas/AppraisalMetadata"
                     }
                 }
             },
@@ -2377,6 +2432,12 @@
                     },
                     {
                         "$ref": "#/components/parameters/session-id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/page_size"
                     }
                 ],
                 "responses": {
@@ -2422,62 +2483,74 @@
                                         "$ref": "#/components/schemas/Appraisal"
                                     }
                                 },
-                                "example": [
-                                    {
-                                        "appraisal_id": 97771,
-                                        "client_reference_id": 9337,
-                                        "cpid": 1262828314,
-                                        "rpid": 1263096838,
-                                        "create_time": "2023-07-25 13:51:08",
-                                        "update_time": "2023-07-25 13:51:08",
-                                        "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
-                                        "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
-                                        "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
-                                        "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
-                                        "is_user_defined_claim": false,
-                                        "item_quantity": 1,
-                                        "show_price_per_item": true,
-                                        "replacement_cost_value": 1684.99,
-                                        "rp_price_date": "2023-07-25 11:07:41",
-                                        "homepage_client_category_id": 2740,
-                                        "selected_client_category_id": 2740,
-                                        "shop_name": "Amazon UK",
-                                        "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
-                                        "is_acv_cp_price_estimate_based": false,
-                                        "is_acv_claimed_damage_based": false,
-                                        "depr_extra_one_year_no_receipt": false,
-                                        "offer_id": 228246862,
-                                        "file_count": 0,
-                                        "row_id": 1
-                                    },
-                                    {
-                                        "appraisal_id": 97770,
-                                        "client_reference_id": 9337,
-                                        "cpid": 1262828314,
-                                        "rpid": 1263096838,
-                                        "create_time": "2023-07-25 13:50:46",
-                                        "update_time": "2023-07-25 13:50:46",
-                                        "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
-                                        "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
-                                        "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
-                                        "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
-                                        "is_user_defined_claim": false,
-                                        "item_quantity": 1,
-                                        "show_price_per_item": true,
-                                        "replacement_cost_value": 1684.99,
-                                        "rp_price_date": "2023-07-25 11:07:41",
-                                        "homepage_client_category_id": 2740,
-                                        "selected_client_category_id": 2740,
-                                        "shop_name": "Amazon UK",
-                                        "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
-                                        "is_acv_cp_price_estimate_based": false,
-                                        "is_acv_claimed_damage_based": false,
-                                        "depr_extra_one_year_no_receipt": false,
-                                        "offer_id": 228246862,
-                                        "file_count": 0,
-                                        "row_id": 2
+                                "example": {
+                                    "appraisals": [
+                                        {
+                                            "appraisal_id": 97771,
+                                            "client_reference_id": 9337,
+                                            "cpid": 1262828314,
+                                            "rpid": 1263096838,
+                                            "create_time": "2023-07-25 13:51:08",
+                                            "update_time": "2023-07-25 13:51:08",
+                                            "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
+                                            "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                            "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "is_user_defined_claim": false,
+                                            "item_quantity": 1,
+                                            "show_price_per_item": true,
+                                            "replacement_cost_value": 1684.99,
+                                            "rp_price_date": "2023-07-25 11:07:41",
+                                            "homepage_client_category_id": 2740,
+                                            "selected_client_category_id": 2740,
+                                            "shop_name": "Amazon UK",
+                                            "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                            "is_acv_cp_price_estimate_based": false,
+                                            "is_acv_claimed_damage_based": false,
+                                            "depr_extra_one_year_no_receipt": false,
+                                            "offer_id": 228246862,
+                                            "file_count": 0,
+                                            "row_id": 1
+                                        },
+                                        {
+                                            "appraisal_id": 97770,
+                                            "client_reference_id": 9337,
+                                            "cpid": 1262828314,
+                                            "rpid": 1263096838,
+                                            "create_time": "2023-07-25 13:50:46",
+                                            "update_time": "2023-07-25 13:50:46",
+                                            "cp_name_cart": "Apple iPhone 14 Pro Max 1TB",
+                                            "rp_name_cart": "Apple iPhone 14 Pro Max 1024GB (2022)",
+                                            "cp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "rp_pic_url": "https://img.valuechecker.net/,---.jpg",
+                                            "is_user_defined_claim": false,
+                                            "item_quantity": 1,
+                                            "show_price_per_item": true,
+                                            "replacement_cost_value": 1684.99,
+                                            "rp_price_date": "2023-07-25 11:07:41",
+                                            "homepage_client_category_id": 2740,
+                                            "selected_client_category_id": 2740,
+                                            "shop_name": "Amazon UK",
+                                            "shop_url": "https://offer.valuechecker.net/kihxRTjWvGNjq4Dj7CKanf",
+                                            "is_acv_cp_price_estimate_based": false,
+                                            "is_acv_claimed_damage_based": false,
+                                            "depr_extra_one_year_no_receipt": false,
+                                            "offer_id": 228246862,
+                                            "file_count": 0,
+                                            "row_id": 2
+                                        }
+                                    ],
+                                    "metadata": {
+                                        "ongoing_count": 0,
+                                        "timestamp": "2025-03-31 10:08:36",
+                                        "appraisals": {
+                                            "current_page": 1,
+                                            "page_size": 25,
+                                            "total_pages": 1,
+                                            "total_items": 2
+                                        }
                                     }
-                                ]
+                                }
                             }
                         }
                     },
