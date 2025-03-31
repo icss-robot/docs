@@ -1,3 +1,14 @@
 ---
 openapi: get /client_reference/{client_reference_id}/appraisal
 ---
+
+<Note>
+This endpoint returns a paginated response. For Client References with a 
+larger quantity of appraisals, use pagination parameters.
+
+`page` - Defaults to 1. Theinimum value is 1, defaults to 1 if it's a
+non-positive integer.
+
+`page_size` - Defaults to 25. The minimum value is 10, and the maximum value is 100.
+
+  </Note>
