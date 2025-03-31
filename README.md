@@ -3,6 +3,7 @@
 ## Development
 
 Install [pre-commit] and the hooks:
+
 ```sh
 pre-commit install
 ```
@@ -21,9 +22,20 @@ Run the following command at the root of your documentation (where mint.json is)
 mintlify dev
 ```
 
+## Pre-Deployment
+
+Increment the API version in the `openapi.json` and `mint.json` file if documenting
+changes of newer API version than listed.
+
 ## Deployment
 
 Simply merging to `main` will publish the changes.
+
+If any changes has been made in `openapi.json`, make sure to upload the latest version
+to Cloud Storage Bucket under `vc2-public-files/api-docs` ([here](https://console.cloud.google.com/storage/browser/_details/vc2-public-files/api-docs/openapi.json)).
+
+After overwriting the file, `Edit Access` and `Add entry`.
+Add new access of: Entity `Public`, Name `allUsers`, Access `Reader`.
 
 ## Troubleshooting
 
